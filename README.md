@@ -2,6 +2,7 @@
 By: Brayden Antonelli, (Everyone Else Add Names)
 
 5) Car rental software
+   
 You are going to create a desktop application for car rental companies. The software will be
 used by the store workers. Workers can make reservations, make a checkout for
 reservation. He can add fines to a car which is returned to the store for smoking/ damage/
