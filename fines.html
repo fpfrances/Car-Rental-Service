@@ -88,6 +88,16 @@
         </p>
         <ul>
             <li>
+                Late Drop Off:
+                <input type="checkbox" id="LateDropOffCheckbox" name="LateDropOffCheckbox" onchange="calculateTotal()">
+                $100 fine
+            </li>
+            <li>
+                Cleaning Fee:
+                <input type="checkbox" id="CleaningFeeCheckbox" name="CleaningFeeCheckbox" onchange="calculateTotal()">
+                $50 fine
+            </li>
+            <li>
                 Smoking in the car:
                 <input type="checkbox" id="smokingCheckbox" name="smokingCheckbox" onchange="calculateTotal()">
                 $50 fine
@@ -95,7 +105,7 @@
             <li>
                 Empty tank of gas:
                 <input type="checkbox" id="emptyTankCheckbox" name="emptyTankCheckbox" onchange="calculateTotal()">
-                $30 fine
+                $40 fine
             </li>
             <li>
                 Damage to the car:
@@ -140,30 +150,40 @@
             damageInstances.appendChild(newDamageInstance);
             calculateTotal();
         }
-
+    
         function calculateTotal() {
+            const lateDropOffCheckbox = document.getElementById('LateDropOffCheckbox');
+            const cleaningFeeCheckbox = document.getElementById('CleaningFeeCheckbox');
             const smokingCheckbox = document.getElementById('smokingCheckbox');
             const emptyTankCheckbox = document.getElementById('emptyTankCheckbox');
             const damageInstances = document.querySelectorAll('.damage-instance');
-
+    
             let totalFines = 0;
-
+    
+            if (lateDropOffCheckbox.checked) {
+                totalFines += 100;
+            }
+    
+            if (cleaningFeeCheckbox.checked) {
+                totalFines += 50;
+            }
+    
             if (smokingCheckbox.checked) {
                 totalFines += 50;
             }
-
+    
             if (emptyTankCheckbox.checked) {
-                totalFines += 30;
+                totalFines += 40;
             }
-
+    
             damageInstances.forEach((instance) => {
                 const damageType = instance.querySelector('.damageType').value;
                 const damagePrice = parseFloat(instance.querySelector('.damagePrice').value) || 0;
                 totalFines += damagePrice;
             });
-
+    
             document.getElementById('totalFines').innerText = `Total Fines: $${totalFines}`;
         }
-    </script>
+    </script>    
 </body>
 </html>
