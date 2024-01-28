@@ -4,76 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knights Auto - Car Rental Reservation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white; /* White background */
-            margin: 0;
-            padding: 0;
-            color: black; /* Black text */
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: white; /* background */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 2px solid #ffd700; /* border */
-        }
-
-        h2 {
-            text-align: center;
-            color: #ffd700; /* text */
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-bottom: 8px;
-            color: #333; 
-        }
-
-        input,
-        select {
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #333; /* border */
-            border-radius: 4px;
-        }
-
-        button {
-            padding: 10px;
-            background-color: #333; /* background */
-            color: white; /* text */
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #555; /* hover */
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="rental.css">
 </head>
 <body>
+    <ul class="nav">
+        <li><button onclick="location.href='index.html'"><b>Home</b></li>
+        <li><button onclick="location.href='login.html'"><b>Account</b></li>
+        <li><button onclick="location.href='rental.html'"><b>Reservation</b></li>
+        <li><button onclick="location.href='contact.html'"><b>Contact Us</b></li>
+        <li><button onclick="location.href='about.html'"><b>About Us</b></li>
+    </ul>
     <div class="container">
-        <h2>Car Rental Reservation</h2>
+        <h1 class="title"><b>Car Rental Reservation</b></h1>
         <form action="#" method="post">
-            <label for="customerName">Customer Name:</label>
+            <label for="customerName"><b>Customer Name:</b></label>
             <input type="text" id="customerName" name="customerName" required>
 
-            <label for="pickupDate">Pick-up Date:</label>
+            <label for="pickupDate"><b>Pick-up Date:</b></label>
             <input type="date" id="pickupDate" name="pickupDate" required>
 
-            <label for="dropoffDate">Drop-off Date:</label>
+            <label for="dropoffDate"><b>Drop-off Date:</b></label>
             <input type="date" id="dropoffDate" name="dropoffDate" required>
 
-            <label for="carType">Car Type:</label>
+            <label for="carType"><b>Car Type:</b></label>
             <select id="carType" name="carType" required>
                 <option value="compact">Compact</option>
                 <option value="sedan">Sedan</option>
