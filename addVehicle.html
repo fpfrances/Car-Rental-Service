@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knights Auto - Add Vehicle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            color: black;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ffd700;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffd700;
+        }
+
+        .nav {
+            list-style-type: none;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .nav li {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .nav button {
+            display: block;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .nav button:hover {
+            background-color: #555;
+        }
+
+        .add-form label,
+        .add-form input,
+        .add-form select,
+        .add-form button {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav">
+        <li><button onclick="location.href='index.html'"><b>Home</b></button></li>
+        <li><button onclick="location.href='account.html'"><b>Account</b></button></li>
+        <li><button onclick="location.href='rental.html'"><b>Reservation</b></button></li>
+        <li><button onclick="location.href='contact.html'"><b>Contact Us</b></button></li>
+        <li><button onclick="location.href='about.html'"><b>About Us</b></button></li>
+    </ul>
+    <div class="container">
+        <h1><b>Add Vehicle</b></h1>
+
+        <form class="add-form" action="#" method="post" onsubmit="addVehicle(); return false;">
+            <label for="manufacturer"><b>Manufacturer:</b></label>
+            <input type="text" id="manufacturer" name="manufacturer" placeholder="Enter manufacturer" required>
+
+            <label for="vehicleName"><b>Vehicle Name:</b></label>
+            <input type="text" id="vehicleName" name="vehicleName" placeholder="Enter vehicle name" required>
+
+            <label for="year"><b>Year:</b></label>
+            <input type="number" id="year" name="year" placeholder="Enter year" required>
+
+            <label for="color"><b>Color:</b></label>
+            <input type="text" id="color" name="color" placeholder="Enter color" required>
+
+            <label for="type"><b>Vehicle Type:</b></label>
+            <select id="type" name="type" required>
+                <option value="sedan">Sedan</option>
+                <option value="suv">SUV</option>
+                <option value="truck">Truck</option>
+                <!-- Add more options as we need -->
+            </select>
+
+            <button type="submit"><b>Add Vehicle</b></button>
+        </form>
+
+        <div id="resultSection" style="display: none;">
+            <h2>Vehicle Added Successfully</h2>
+            <p><b>Generated ID:</b> <span id="generatedID"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function addVehicle() {
+            var manufacturer = document.getElementById('manufacturer').value;
+            var vehicleName = document.getElementById('vehicleName').value;
+            var year = document.getElementById('year').value;
+            var color = document.getElementById('color').value;
+            var type = document.getElementById('type').value;
+
+            // Generate a 12-digit ID using specified format
+            var id = generateID(manufacturer, vehicleName, year, color, type);
+
+            document.getElementById('resultSection').style.display = 'block';
+            document.getElementById('generatedID').innerText = id;
+        }
+
+        function generateID(manufacturer, vehicleName, year, color, type) {
+            // Form the ID based off provided info
+            var firstTwoManufacturer = manufacturer.substring(0, 2).toUpperCase();
+            var firstTwoVehicleName = vehicleName.substring(0, 2).toUpperCase();
+            var yearDigits = year.slice(-4);
+            var colorFirstLetter = color.charAt(0).toUpperCase();
+            var typeFirstLetter = type.charAt(0).toUpperCase();
+
+            // Combine components to form the ID
+            var id = firstTwoManufacturer + firstTwoVehicleName + yearDigits + colorFirstLetter + typeFirstLetter;
+
+            return id;
+        }
+    </script>
+
+</body>
+</html>
