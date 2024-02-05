@@ -119,6 +119,9 @@
         <button class="filter-toggle" onclick="toggleFilterForm()">Filter Cars</button>
 
         <form class="filter-form" action="#" method="get" onsubmit="performSearch(); return false;">
+            <label for="manufacturerFilter"><b>Filter by Manufacturer:</b></label>
+            <input type="text" id="manufacturerFilter" name="manufacturerFilter" placeholder="Enter manufacturer">
+            
             <label for="carNameFilter"><b>Search by Car Name:</b></label>
             <input type="text" id="carNameFilter" name="carNameFilter" placeholder="Enter car name">
 
@@ -154,6 +157,7 @@
 
         function performSearch() {
             var carName = document.getElementById('carNameFilter').value;
+            var manufacturer = document.getElementById('manufacturerFilter').value;
             var year = document.getElementById('yearFilter').value;
             var type = document.getElementById('typeFilter').value;
             var color = document.getElementById('colorFilter').value;
@@ -161,6 +165,7 @@
 
             
             var searchResultsContainer = document.getElementById('searchResults');
+            //this is temp
             searchResultsContainer.innerHTML = '<h2>Search Results</h2><ul><li>Result 1</li><li>Result 2</li></ul>';
         }
     </script>
