@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knights Auto Car Rental</title>
-    <link rel="stylesheet" media="screen and (min-width: 480px)" type="text/css" href="account.css">
+    <link rel="stylesheet" media="screen and (min-width: 120px)" type="text/css" href="account.css">
     <style>
         /* Add your CSS styles here if needed */
     </style>
@@ -12,7 +12,7 @@
 <body>
     <ul class="nav">
         <li><button onclick="location.href='index.html'"><b>Home</b></button></li>
-        <li><button onclick="location.href='account.html'"><b>Account</b></button></li>
+        <li><button onclick="location.href='account/account.html'"><b>Account</b></button></li>
         <li><button onclick="location.href='rental.html'"><b>Reservation</b></button></li>
         <li><button onclick="location.href='contact.html'"><b>Contact Us</b></button></li>
         <li><button onclick="location.href='about.html'"><b>About Us</b></button></li>
@@ -32,12 +32,6 @@
             <li><label onclick="location.href='form.html'">Don't have an account? Click here</label></li>
         </form>
     </div>
-
-    <script>
-        function togglePasswordVisibility() {
-            var passwordInput = document.getElementById("password");
-            passwordInput.type = (passwordInput.type === "password") ? "text" : "password";
-        }
-    </script>
+    <script src="account.js"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@ body{
     color: #333;
     list-style: none;
     text-align: right;
-    padding: 26px 0 29px 0;
+    padding: 22px 0 18px 0;
 }
 
 .nav > li {
@@ -49,8 +49,7 @@ label {
 
 .container {
     max-width: 350px;
-    margin-left: 250px;
-    margin-top: 200px;
+    margin: 250px auto;
     background-color: white; /* background */
     padding: 40px;
     border-radius: 8px;
@@ -70,7 +69,7 @@ label {
 button {
     padding: 10px;
     font-size: 15px;
-    margin-top: 5px;
+    margin: 10px auto;
     background-color: #333; /* background */
     color: white; /* text */
     border: none;
@@ -79,9 +78,7 @@ button {
 }
 
 .container > form > button {
-    margin-top: 40px;
-    margin-left: 80px;
-    margin-right: 80px;
+    margin: auto;
     padding: 10px 70px;
     display: flex;
 }
