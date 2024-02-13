@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     color: black; /* Black text */
-    background-image: url('../images/backgroundhome.jpg');
+    background-image: url('../images/backgroundabout.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -35,10 +35,10 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 250px auto;
     background-color: white; /* background */
-    padding: 30px;
+    padding: 85px 80px;
     border-radius: 8px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
