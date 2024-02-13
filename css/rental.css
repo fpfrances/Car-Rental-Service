@@ -4,7 +4,7 @@ body{
     margin: 0;
     padding: 0;
     color: black; /* Black text */
-    background-image: url('backgroundimage.jpg');
+    background-image: url('../images/backgroundrental.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -12,7 +12,7 @@ body{
 }
 
 .nav {
-    background-image: url('logo.png');
+    background-image: url('../images/logo.png');
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
     font-size: 15px;
