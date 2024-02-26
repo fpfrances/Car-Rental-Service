@@ -24,23 +24,29 @@ async function performSearch() {
 }
 
 function buildQuery() {
-    var manufacturer = document.getElementById('manufacturerFilter').value;
-    var carName = document.getElementById('carNameFilter').value;
-    var year = document.getElementById('yearFilter').value;
-    var type = document.getElementById('typeFilter').value;
-    var color = document.getElementById('colorFilter').value;
-    var id = document.getElementById('idFilter').value;
-
     var queryParams = [];
+
+    var manufacturer = document.getElementById('manufacturerFilter').value;
     if (manufacturer) queryParams.push('manufacturer=' + encodeURIComponent(manufacturer));
-    if (carName) queryParams.push('carName=' + encodeURIComponent(carName));
+
+    var carName = document.getElementById('carNameFilter').value;
+    if (carName) queryParams.push('vehicleName=' + encodeURIComponent(carName));
+
+    var year = document.getElementById('yearFilter').value;
     if (year) queryParams.push('year=' + encodeURIComponent(year));
+
+    var type = document.getElementById('typeFilter').value;  // Ensure correct ID is used
     if (type) queryParams.push('type=' + encodeURIComponent(type));
+
+    var color = document.getElementById('colorFilter').value;
     if (color) queryParams.push('color=' + encodeURIComponent(color));
+
+    var id = document.getElementById('idFilter').value;
     if (id) queryParams.push('id=' + encodeURIComponent(id));
 
     return queryParams.length > 0 ? '?' + queryParams.join('&') : '';
 }
+
 
 function displaySearchResults(data) {
     var searchResultsContainer = document.getElementById('searchResults');
@@ -52,7 +58,7 @@ function displaySearchResults(data) {
     var html = '<h2>Search Results</h2><ul>';
     data.forEach(function(vehicle) {
         html += '<li>';
-        html += '<b>Brand:</b> ' + vehicle.manufacturer + '<br>';
+        html += '<b>Manufacturer:</b> ' + vehicle.manufacturer + '<br>';
         html += '<b>Model:</b> ' + vehicle.vehicleName + '<br>';
         html += '<b>Year:</b> ' + vehicle.year + '<br>';
         html += '<b>Color:</b> ' + vehicle.color + '<br>';

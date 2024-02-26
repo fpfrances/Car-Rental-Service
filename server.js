@@ -59,17 +59,27 @@ app.listen(PORT, () => {
 
 app.get('/vehicles', async (req, res) => {
     try {
-        let query = {}; // Default query to fetch all vehicles
+        let query = {};
 
-        // Implement filtering based on query parameters
         if (req.query.manufacturer) {
             query.manufacturer = req.query.manufacturer;
+        }
+        if (req.query.vehicleName) {
+            query.vehicleName = req.query.vehicleName;
         }
         if (req.query.year) {
             query.year = req.query.year;
         }
-        // Add more filters as needed
-        
+        if (req.query.type) {
+            query.type = req.query.type;
+        }
+        if (req.query.color) {
+            query.color = req.query.color;
+        }
+        if (req.query.id) {
+            query._id = req.query.id;
+        }
+
         const vehicles = await Vehicle.find(query);
         res.json(vehicles);
     } catch (error) {
