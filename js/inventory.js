@@ -52,8 +52,8 @@ function displaySearchResults(data) {
     var html = '<h2>Search Results</h2><ul>';
     data.forEach(function(vehicle) {
         html += '<li>';
-        html +=  vehicle.manufacturer + '<br>';
-        html +=  vehicle.vehicleName + '<br>';
+        html += '<b>Brand:</b> ' + vehicle.manufacturer + '<br>';
+        html += '<b>Model:</b> ' + vehicle.vehicleName + '<br>';
         html += '<b>Year:</b> ' + vehicle.year + '<br>';
         html += '<b>Color:</b> ' + vehicle.color + '<br>';
         html += '<b>Type:</b> ' + vehicle.type + '<br>';
