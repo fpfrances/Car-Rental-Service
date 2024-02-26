@@ -35,7 +35,7 @@ function buildQuery() {
     var year = document.getElementById('yearFilter').value;
     if (year) queryParams.push('year=' + encodeURIComponent(year));
 
-    var type = document.getElementById('typeFilter').value;  // Ensure correct ID is used
+    var type = document.getElementById('typeFilter').value;  
     if (type) queryParams.push('type=' + encodeURIComponent(type));
 
     var color = document.getElementById('colorFilter').value;
