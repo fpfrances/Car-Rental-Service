@@ -61,8 +61,9 @@ function displaySearchResults(data) {
         html += '<b>Manufacturer:</b> ' + vehicle.manufacturer + '<br>';
         html += '<b>Model:</b> ' + vehicle.vehicleName + '<br>';
         html += '<b>Year:</b> ' + vehicle.year + '<br>';
-        html += '<b>Color:</b> ' + vehicle.color + '<br>';
         html += '<b>Type:</b> ' + vehicle.type + '<br>';
+        html += '<b>Color:</b> ' + vehicle.color + '<br>';
+        html += '<b>Vehicle ID #:</b> ' + vehicle._id + '<br>';
         html += '</div>';
         html += '<hr>'; // Add horizontal line between cars
     });
