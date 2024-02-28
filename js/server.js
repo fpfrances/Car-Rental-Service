@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const connectDB = require('./dbConn');
 
+//**********
+const Vehicle = require('./models/vehicle');
+
 const app = express();
 
 
@@ -15,6 +18,7 @@ app.listen(PORT, () => {
 //connects to mongoDB car_rental_db
 connectDB();
 
+/*
 // Define the vehicle schema
 const vehicleSchema = new mongoose.Schema({
     manufacturer: String,
@@ -26,8 +30,11 @@ const vehicleSchema = new mongoose.Schema({
     status: { type: String, enum: ['A', 'O', 'M'], default: 'A' } // Default status is 'A' (Available)
 })
 
+
 // Create a Vehicle model
 const Vehicle = mongoose.model('Vehicle', vehicleSchema);
+
+*/
 
 // Parse JSON request body
 app.use(bodyParser.json());
