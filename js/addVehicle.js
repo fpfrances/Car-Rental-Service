@@ -7,6 +7,10 @@ document.getElementById('addVehicleForm').addEventListener('submit', async funct
         jsonObject[key] = value;
     });
 
+    // Combine license plate values into a single string
+    const licensePlate = combineLicensePlate();
+    jsonObject['licensePlate'] = licensePlate;
+
     try {
         const response = await fetch('http://localhost:3000/vehicles', {
             method: 'POST',
@@ -27,3 +31,15 @@ document.getElementById('addVehicleForm').addEventListener('submit', async funct
         console.error('Error adding vehicle:', error);
     }
 });
+
+function combineLicensePlate() {
+    var licensePlate = "";
+    licensePlate += document.getElementById('licensePlate1').value;
+    licensePlate += document.getElementById('licensePlate2').value;
+    licensePlate += document.getElementById('licensePlate3').value;
+    licensePlate += document.getElementById('licensePlate4').value;
+    licensePlate += document.getElementById('licensePlate5').value;
+    licensePlate += document.getElementById('licensePlate6').value;
+    licensePlate += document.getElementById('licensePlate7').value;
+    return licensePlate;
+}

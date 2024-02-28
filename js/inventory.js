@@ -41,8 +41,8 @@ function buildQuery() {
     var color = document.getElementById('colorFilter').value;
     if (color) queryParams.push('color=' + encodeURIComponent(color));
 
-    var id = document.getElementById('idFilter').value;
-    if (id) queryParams.push('id=' + encodeURIComponent(id));
+    var licensePlate = document.getElementById('licensePlateFilter').value;
+    if (licensePlate) queryParams.push('licensePlate=' + encodeURIComponent(licensePlate));
 
     return queryParams.length > 0 ? '?' + queryParams.join('&') : '';
 }
@@ -63,7 +63,17 @@ function displaySearchResults(data) {
         html += '<b>Year:</b> ' + vehicle.year + '<br>';
         html += '<b>Type:</b> ' + vehicle.type + '<br>';
         html += '<b>Color:</b> ' + vehicle.color + '<br>';
-        html += '<b>Vehicle ID #:</b> ' + vehicle._id + '<br>';
+        html += '<b>License Plate:</b> ' + vehicle.licensePlate + '<br>';
+        // status displays based on the single-letter code
+        html += '<b>Status:</b> ';
+        if (vehicle.status === 'A') {
+            html += 'Available';
+        } else if (vehicle.status === 'O') {
+            html += 'Out';
+        } else if (vehicle.status === 'M') {
+            html += 'Maintenance';
+        }
+        html += '<br>';
         html += '</div>';
         html += '<hr>'; // Add horizontal line between cars
     });

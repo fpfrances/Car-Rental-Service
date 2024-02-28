@@ -21,8 +21,10 @@ const vehicleSchema = new mongoose.Schema({
     vehicleName: String,
     year: Number,
     color: String,
-    type: String
-});
+    type: String,
+    licensePlate: String,
+    status: { type: String, enum: ['A', 'O', 'M'], default: 'A' } // Default status is 'A' (Available)
+})
 
 // Create a Vehicle model
 const Vehicle = mongoose.model('Vehicle', vehicleSchema);
@@ -36,10 +38,23 @@ app.use(cors());
 // POST route to add a new vehicle
 app.post('/vehicles', async (req, res) => {
     try {
+        // Extract the license plate characters from the request body
+        const licensePlate = req.body.licensePlate;
+
         // Create a new vehicle instance based on request body
-        const newVehicle = new Vehicle(req.body);
+        const newVehicle = new Vehicle({
+            manufacturer: req.body.manufacturer,
+            vehicleName: req.body.vehicleName,
+            year: req.body.year,
+            color: req.body.color,
+            type: req.body.type,
+            licensePlate: licensePlate, // Assign the extracted license plate
+            status: 'A' // Set the status to 'A' (Available) by default
+        });
+
         // Save the new vehicle to the database
         await newVehicle.save();
+
         // Send a success response
         res.status(201).json({ id: newVehicle._id }); // Return the ID of the newly added vehicle
     } catch (error) {
@@ -76,8 +91,8 @@ app.get('/vehicles', async (req, res) => {
         if (req.query.color) {
             query.color = req.query.color;
         }
-        if (req.query.id) {
-            query._id = req.query.id;
+        if (req.query.licensePlate) {
+            query.licensePlate = req.query.licensePlate; // Filter by license plate
         }
 
         const vehicles = await Vehicle.find(query);
