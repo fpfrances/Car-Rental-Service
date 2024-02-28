@@ -2,18 +2,18 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const connectDB = require('./dbConn');
 
 const app = express();
 
-// Connect to MongoDB
-mongoose.connect('mongodb+srv://rpettit088:T3HVz2FgzsbvdBrB@cluster0.1kb8cgw.mongodb.net/car_rental_db?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch((err) => {
-    console.error('MongoDB connection error:', err);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+//connects to mongoDB car_rental_db
+connectDB();
 
 // Define the vehicle schema
 const vehicleSchema = new mongoose.Schema({
@@ -64,10 +64,8 @@ app.post('/vehicles', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+
+
 
 
 // Server code to fetch all vehicles and implement filtering
