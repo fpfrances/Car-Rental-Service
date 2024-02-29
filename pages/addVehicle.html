@@ -4,80 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knights Auto - Add Vehicle</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            margin: 0;
-            padding: 0;
-            color: black;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 2px solid #ffd700;
-        }
-
-        h1 {
-            text-align: center;
-            color: #ffd700;
-        }
-
-        .add-form label,
-        .add-form input,
-        .add-form select,
-        .add-form button {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .add-form button {
-            padding: 10px;
-            background-color: #ffd700;
-            color: black;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .add-form button:hover {
-            background-color: #ffc107;
-        }
+    <link rel="stylesheet" media="screen and (min-width: 120px)" type="text/css" href="../css/addVehicle.css">
     
-        /* Style for the container holding the license plate inputs */
-        .license-plate-input {
-            display: flex;
-            justify-content: left;
-        }
-
-        /* Style for each individual input box */
-        .license-plate-box {
-            width: 30px; /* Width of each box */
-            height: 30px; /* Height of each box */
-            text-align: center; /* Center-aligns the text inside the box */
-            font-size: 18px; /* Adjust font size as needed */
-            margin: 0 5px; /* Adjust spacing between boxes */
-        }
-    
-        #resultSection {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        #resultSection h2 {
-            color: #333;
-            font-size: 18px;
-        }
-
-    </style>
 </head>
 <body>
     <!-- Navigation bar -->
@@ -116,6 +44,7 @@
             </select>
 
             <div class="license-plate-input">
+                <label for="licensePlate"><b>License Plate:</b></label>
                 <input type="text" id="licensePlate1" class="license-plate-box" maxlength="1" required>
                 <input type="text" id="licensePlate2" class="license-plate-box" maxlength="1" required>
                 <input type="text" id="licensePlate3" class="license-plate-box" maxlength="1" required>
@@ -124,27 +53,6 @@
                 <input type="text" id="licensePlate6" class="license-plate-box" maxlength="1" required>
                 <input type="text" id="licensePlate7" class="license-plate-box" maxlength="1" required>
             </div>
-
-<script>
-
-    // Function to move focus to the next input box
-    function moveToNextInput(currentInput) {
-        var maxLength = parseInt(currentInput.getAttribute('maxlength'));
-        var nextInput = currentInput.nextElementSibling;
-
-        if (currentInput.value.length >= maxLength && nextInput) {
-            nextInput.focus();
-        }
-    }
-
-    // Event listener to move focus to the next input box
-    document.querySelectorAll('.license-plate-box').forEach(function(input) {
-        input.addEventListener('input', function() {
-            moveToNextInput(this);
-        });
-    });
-</script>
-
 
             <button type="submit"><b>Add Vehicle</b></button>
         </form>

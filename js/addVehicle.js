@@ -32,6 +32,23 @@ document.getElementById('addVehicleForm').addEventListener('submit', async funct
     }
 });
 
+// Function to move focus to the next input box
+function moveToNextInput(currentInput) {
+    var maxLength = parseInt(currentInput.getAttribute('maxlength'));
+    var nextInput = currentInput.nextElementSibling;
+
+    if (currentInput.value.length >= maxLength && nextInput) {
+        nextInput.focus();
+    }
+}
+
+// Event listener to move focus to the next input box
+document.querySelectorAll('.license-plate-box').forEach(function(input) {
+    input.addEventListener('input', function() {
+        moveToNextInput(this);
+    });
+});
+
 function combineLicensePlate() {
     var licensePlate = "";
     licensePlate += document.getElementById('licensePlate1').value;

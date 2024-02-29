@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knights Auto - Car Return Report</title>
+    <link rel="stylesheet" media="screen and (min-width: 120px)" type="text/css" href="../css/report.css">
 </head>
 <body>
+    <!-- Navigation bar -->
     <ul class="nav">
+        <li><button onclick="location.href='index.html'"><b>Home</b></button></li>
+        <li><button onclick="location.href='account.html'"><b>Account</b></button></li>
+        <li><button onclick="location.href='rental.html'"><b>Reservation</b></button></li>
+        <li><button onclick="location.href='contact.html'"><b>Contact Us</b></button></li>
+        <li><button onclick="location.href='about.html'"><b>About Us</b></button></li>
     </ul>
     <div class="container">
         <h1 class="title"><b>Car Return Report</b></h1>
@@ -18,10 +25,11 @@
             <input type="date" max="9999-12-31" id="returnDate" name="returnDate" required>
 
             <label for="returnCondition"><b>Condition:</b></label>
-            <textarea id="returnCondition" name="returnCondition" rows="4" required></textarea>
+            <textarea id="returnCondition" name="returnCondition" rows="6" cols="42" required></textarea>
 
             <button type="submit"><b>Create Report</b></button>
         </form>
     </div>
+    <script src="../js/report.js"></script>   
 </body>
 </html>

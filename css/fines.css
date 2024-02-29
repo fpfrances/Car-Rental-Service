@@ -4,27 +4,11 @@ body {
     margin: 0;
     padding: 0;
     color: black; /* Black text */
-    background-image: url('../images/backgroundinventory.jpg');
+    background-image: url('../images/backgroundfines.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-}
-
-.container {
-    max-width: 800px;
-    margin: 150px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    margin-bottom: 40px;
-    margin-top: 0px;
-    text-align: center;
-    color: #000000;
 }
 
 .nav {
@@ -61,45 +45,42 @@ h1 {
     background-color: #808080;
 }
 
-.filter-form {
-    display: none;
+.container {
+    max-width: 800px;
+    margin: 150px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 
-.filter-toggle {
-    display: block;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.container h2 {
     margin-bottom: 40px;
+    margin-top: 0px;
+    text-align: center;
+    color: #000000; /* Gold text */
 }
 
-.filter-toggle:hover {
-    background-color: #555;
+.container p {
+    text-align: justify;
+    color: #333; /* Darker black */
 }
 
-.filter-form label,
-.filter-form button,
-.filter-form select {
-    display: block;
-}
-
-.filter-form label {
+.container label {
     margin-bottom: 5px;
     font-size: 14px;
     color: #333; 
 }
 
-.filter-form select {
-    padding: 8px 15px;
+.container select{
+    padding: 8px 17px;
     margin-bottom: 20px;
     font-size: 14px;
     border: 1px solid #333; /* border */
     border-radius: 10px;
 }
 
-.filter-form input {
+.container input {
     padding: 10px;
     margin-bottom: 20px;
     font-size: 14px;
@@ -107,10 +88,24 @@ h1 {
     border-radius: 10px;
 }
 
-.filter-form button {
+.container .damage-instance {
+    margin-bottom: 15px;
+}
+
+.container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.container li {
+    margin-bottom: 10px;
+}
+
+.container button {
+    display: block;
     padding: 10px;
     font-size: 14px;
-    margin: 10px auto;
+    margin: 20px auto;
     background-color: #333; /* background */
     color: white; /* text */
     border: none;
@@ -118,27 +113,11 @@ h1 {
     cursor: pointer;
 }
 
-#searchResults {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.container button:hover {
+    background-color: #808080; /* Slightly darker black on hover */
 }
 
-#searchResults h2 {
-    color: #333;
-    font-size: 18px;
-    margin-top: 0px;
-    text-align: center;
-}
-
-#searchResults ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#searchResults li {
-    margin-bottom: 10px;
-    color: #555;
+.container #totalFines {
+    font-weight: bold;
+    color: #555; /* Darker black */
 }

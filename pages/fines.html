@@ -4,88 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knights Auto - Fines for Returned Cars</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white; /* White background */
-            margin: 0;
-            padding: 0;
-            color: black; /* Black text */
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: white; /* White background */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 2px solid #ffd700; /* Gold border */
-        }
-
-        h2 {
-            text-align: center;
-            color: #ffd700; /* Gold text */
-        }
-
-        p {
-            text-align: justify;
-            color: #333; /* Darker black */
-        }
-
-        label {
-            display: block;
-            margin-top: 10px;
-            color: #333; /* Darker black */
-        }
-
-        select, input {
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #333; /* Darker black border */
-            border-radius: 4px;
-        }
-
-        .damage-instance {
-            margin-bottom: 15px;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #333; /* Darker black background */
-            color: white; /* White text */
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #555; /* Slightly darker black on hover */
-        }
-
-        #totalFines {
-            font-weight: bold;
-            color: #555; /* Darker black */
-        }
-    </style>
+    <link rel="stylesheet" media="screen and (min-width: 120px)" type="text/css" href="../css/fines.css">
 </head>
 <body>
+    <!-- Navigation bar -->
+    <ul class="nav">
+        <li><button onclick="location.href='index.html'"><b>Home</b></button></li>
+        <li><button onclick="location.href='account.html'"><b>Account</b></button></li>
+        <li><button onclick="location.href='rental.html'"><b>Reservation</b></button></li>
+        <li><button onclick="location.href='contact.html'"><b>Contact Us</b></button></li>
+        <li><button onclick="location.href='about.html'"><b>About Us</b></button></li>
+    </ul>
+
     <div class="container">
         <h2>Fines for Returned Cars</h2>
-        <p>
+        <p><b>
             Here are the fines associated with returned cars:
-        </p>
+        </b></p>
         <ul>
             <li>
                 Late Drop Off:
@@ -108,10 +43,13 @@
                 $40 fine
             </li>
             <li>
+                <br>
+                <p><b>
                 Damage to the car:
+                </b></p>
                 <div id="damageInstances">
                     <div class="damage-instance">
-                        <label for="damageType">Select Damage Type:</label>
+                        <label for="damageType">Damage Type:</label>
                         <select class="damageType" name="damageType[]" onchange="calculateTotal()">
                             <option value="scratch">Scratch</option>
                             <option value="dent">Dent</option>
@@ -119,7 +57,7 @@
                             <!-- Add more damage types as needed -->
                         </select>
                         <br>
-                        Pricing:
+                        <label for="pricing">Pricing:</label>
                         <input type="number" class="damagePrice" name="damagePrice[]" placeholder="Enter Price" onchange="calculateTotal()">
                     </div>
                 </div>
@@ -127,63 +65,8 @@
             </li>
         </ul>
         <p id="totalFines">Total Fines: $0</p>
-        <button onclick="location.href='rental.html'">Make a Reservation</button>
+        <button type="printReceipt">Print Receipt</button>
     </div>
-
-    <script>
-        function addDamageInstance() {
-            const damageInstances = document.getElementById('damageInstances');
-            const newDamageInstance = document.createElement('div');
-            newDamageInstance.classList.add('damage-instance');
-            newDamageInstance.innerHTML = `
-                <label for="damageType">Select Damage Type:</label>
-                <select class="damageType" name="damageType[]" onchange="calculateTotal()">
-                    <option value="scratch">Scratch</option>
-                    <option value="dent">Dent</option>
-                    <option value="brokenMirror">Broken Mirror</option>
-                    <!-- Add more damage types as needed -->
-                </select>
-                <br>
-                Pricing:
-                <input type="number" class="damagePrice" name="damagePrice[]" placeholder="Enter Price" onchange="calculateTotal()">
-            `;
-            damageInstances.appendChild(newDamageInstance);
-            calculateTotal();
-        }
-    
-        function calculateTotal() {
-            const lateDropOffCheckbox = document.getElementById('LateDropOffCheckbox');
-            const cleaningFeeCheckbox = document.getElementById('CleaningFeeCheckbox');
-            const smokingCheckbox = document.getElementById('smokingCheckbox');
-            const emptyTankCheckbox = document.getElementById('emptyTankCheckbox');
-            const damageInstances = document.querySelectorAll('.damage-instance');
-    
-            let totalFines = 0;
-    
-            if (lateDropOffCheckbox.checked) {
-                totalFines += 100;
-            }
-    
-            if (cleaningFeeCheckbox.checked) {
-                totalFines += 50;
-            }
-    
-            if (smokingCheckbox.checked) {
-                totalFines += 50;
-            }
-    
-            if (emptyTankCheckbox.checked) {
-                totalFines += 40;
-            }
-    
-            damageInstances.forEach((instance) => {
-                const damageType = instance.querySelector('.damageType').value;
-                const damagePrice = parseFloat(instance.querySelector('.damagePrice').value) || 0;
-                totalFines += damagePrice;
-            });
-    
-            document.getElementById('totalFines').innerText = `Total Fines: $${totalFines}`;
-        }
-    </script>    
+    <script src="../js/fines.js"></script>     
 </body>
 </html>

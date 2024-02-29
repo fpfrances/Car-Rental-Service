@@ -1,0 +1,134 @@
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white; /* White background */
+            margin: 0;
+            padding: 0;
+            color: black; /* Black text */
+            background-image: url('../images/backgroundaddvehicle.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .nav {
+            background-image: url('../images/logo.png');
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            margin-top: 0px;
+            background-color: white;
+            color: #333;
+            list-style: none;
+            text-align: right;
+            padding: 21px 0 20px 0;
+        }
+            
+        .nav > li {
+            display: inline-block;
+            padding-right: 50px;
+            color: #ffffff;
+        }
+
+        .nav > li > button {
+            padding: 10px;
+            font-size: 15px;
+            margin: 10px auto;
+            background-color: #333; /* background */
+            color: white; /* text */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+            
+        .nav > li > button:hover {
+            background-color: #808080;
+        }
+            
+        h1{
+            margin-bottom: 40px;
+            margin-top: 0px;
+            text-align: center;
+            color: #000000; /* text */
+        }
+            
+        .container {
+            max-width: 600px;
+            margin: 200px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333; 
+        }
+
+        .add-form label,
+        .add-form button, 
+        .license-plate-input label {
+            display: block;
+        }
+
+        .add-form select {
+            padding: 10px 30px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 1px solid #333; /* border */
+            border-radius: 10px;
+        }
+
+        .add-form input {
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 1px solid #333; /* border */
+            border-radius: 10px;
+        }
+
+        .add-form button {
+            padding: 10px;
+            font-size: 14px;
+            margin: 10px auto;
+            background-color: #333; /* background */
+            color: white; /* text */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .add-form button:hover {
+            background-color: #808080;
+        }
+    
+
+        /* Style for the container holding the license plate inputs */
+        .license-plate-input {
+            display: block;
+            justify-content: left;
+        }
+
+        /* Style for each individual input box */
+        .license-plate-box {
+            width: 20px; /* Width of each box */
+            height: 20px; /* Height of each box */
+            text-align: center; /* Center-aligns the text inside the box */
+            font-size: 18px; /* Adjust font size as needed */
+            margin: 0 2px; /* Adjust spacing between boxes */
+        }
+    
+        #resultSection {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #resultSection h2 {
+            color: #333;
+            font-size: 18px;
+        }
