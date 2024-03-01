@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const connectDB = require('./dbConn');
 
-//**********
 const Vehicle = require('./models/vehicle');
 
 const app = express();
