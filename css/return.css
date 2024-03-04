@@ -1,0 +1,85 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: white; /* White background */
+    margin: 0;
+    padding: 0;
+    color: black; /* Black text */
+    background-image: url('../images/backgroundrental.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.nav {
+    background-image: url('../images/logo.png');
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    margin-top: 0px;
+    background-color: white;
+    color: #333;
+    list-style: none;
+    text-align: right;
+    padding: 26px 0 29px 0;
+}
+
+.nav > li {
+    display: inline-block;
+    padding-right: 50px;
+    color: #ffffff;
+}
+
+.nav > li > a:hover {
+    color: #808080;
+}
+
+h1.title{
+    margin-bottom: 40px;
+    text-align: center;
+    color: #333; /* text */
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #333; 
+}
+
+.container {
+    max-width: 650px;
+    margin: 250px auto;
+    background-color: white; /* background */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input,
+select {
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: 1px solid #333; /* border */
+    border-radius: 10px;
+}
+
+button {
+    padding: 10px;
+    font-size: 15px;
+    margin-top: 5px;
+    background-color: #333; /* background */
+    color: white; /* text */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #808080; /* hover */
+}
