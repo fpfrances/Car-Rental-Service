@@ -51,5 +51,22 @@
         <div id="searchResults"></div>
     </div>
     <script src="../js/inventory.js"></script>
+    <script>
+        // Function to handle clicking the rent button
+        function rentCar(licensePlate) {
+            location.href = `rental.html?licensePlate=${licensePlate}`;
+        }
+
+        // Add event listeners to rent buttons
+        document.addEventListener('DOMContentLoaded', function () {
+            const rentButtons = document.querySelectorAll('.rent-button');
+            rentButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const licensePlate = this.getAttribute('data-license-plate');
+                    rentCar(licensePlate);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

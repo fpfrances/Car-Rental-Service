@@ -68,6 +68,8 @@ function displaySearchResults(data) {
         html += '<b>Status:</b> ';
         if (vehicle.status === 'A') {
             html += 'Available';
+            // Add rent button for available vehicles
+            html += `<button class="rent-button" data-license-plate="${vehicle.licensePlate}">Rent</button>`;
         } else if (vehicle.status === 'O') {
             html += 'Out';
         } else if (vehicle.status === 'M') {
@@ -80,4 +82,43 @@ function displaySearchResults(data) {
     html += '</ul>';
 
     searchResultsContainer.innerHTML = html;
+
+    // Add event listeners to rent buttons
+    const rentButtons = document.querySelectorAll('.rent-button');
+    rentButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const licensePlate = this.getAttribute('data-license-plate');
+            rentCar(licensePlate);
+        });
+    });
 }
+
+function renderSearchResults(vehicles) {
+    const searchResultsContainer = document.getElementById('searchResults');
+    searchResultsContainer.innerHTML = ''; // Clear previous search results
+    vehicles.forEach(vehicle => {
+        if (vehicle.status === 'Available') {
+            const vehicleDiv = document.createElement('div');
+            // Create HTML content for each vehicle
+            const vehicleInfo = `
+                <h3>Vehicle: ${vehicle.manufacturer}</h3>
+                <h3>Model:${vehicle.vehicleName}</h3>
+                <p>Year: ${vehicle.year}</p>
+                <p>Color: ${vehicle.color}</p>
+                <p>License Plate: ${vehicle.licensePlate}</p>
+                <p>Status: ${vehicle.status}</p>
+            `;
+            vehicleDiv.innerHTML = vehicleInfo;
+            // Create and append the rent button
+            const rentButton = document.createElement('button');
+            rentButton.textContent = 'Rent';
+            rentButton.addEventListener('click', function() {
+                // Redirect to rental page with vehicle ID
+                window.location.href = `rental.html?id=${vehicle._id}`;
+            });
+            vehicleDiv.appendChild(rentButton); // Append rent button to vehicle div
+            searchResultsContainer.appendChild(vehicleDiv); // Append vehicle div to search results container
+        }
+    });
+}
+
