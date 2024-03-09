@@ -5,6 +5,7 @@ const cors = require('cors');
 const connectDB = require('./dbConn');
 
 const Vehicle = require('./models/vehicle');
+const Reservation = require('./models/reservation');
 
 const app = express();
 
@@ -51,10 +52,6 @@ app.post('/vehicles', async (req, res) => {
         res.status(500).json({ error: 'Error adding vehicle' });
     }
 });
-
-
-
-
 
 // Server code to fetch all vehicles and implement filtering
 
