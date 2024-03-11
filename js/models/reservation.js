@@ -1,5 +1,3 @@
-// reservation.js
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Vehicle = require('./vehicle');
@@ -26,7 +24,7 @@ const reservationSchema = new mongoose.Schema({
         type: Date,
         required: [true, 'Drop-off date is required']
     },
-    ID: String
+    VehicleID: String
 });
 
 module.exports = mongoose.model('Reservation', reservationSchema);

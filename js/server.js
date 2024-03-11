@@ -109,7 +109,7 @@ app.post('/reservation', async (req, res) => {
             customerAddress,
             pickupDate,
             dropoffDate,
-            ID: vehicle._id// Link the reservation to the vehicle
+            VehicleID: vehicle._id// Link the reservation to the vehicle
         });
 
         // Save the reservation to the database
