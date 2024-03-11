@@ -85,3 +85,39 @@ app.get('/vehicles', async (req, res) => {
         res.status(500).json({ error: 'Error fetching vehicles' });
     }
 });
+
+// Route to handle reservation submission
+app.post('/reservation', async (req, res) => {
+    try {
+        const { customerName, customerEmail, customerAddress, pickupDate, dropoffDate, licensePlate } = req.body;
+
+        // Find the vehicle based on its license plate
+        const vehicle = await Vehicle.findOne({ licensePlate });
+
+        if (!vehicle) {
+            return res.status(404).json({ error: 'Vehicle not found' });
+        }
+
+        // Update the vehicle status to 'O' (Out)
+        vehicle.status = 'O';
+        await vehicle.save();
+
+        // Create a new reservation
+        const newReservation = new Reservation({
+            customerName,
+            customerEmail,
+            customerAddress,
+            pickupDate,
+            dropoffDate,
+            ID: vehicle._id// Link the reservation to the vehicle
+        });
+
+        // Save the reservation to the database
+        await newReservation.save();
+
+        res.status(201).json({ message: 'Reservation submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting reservation:', error);
+        res.status(500).json({ error: 'Error submitting reservation' });
+    }
+});

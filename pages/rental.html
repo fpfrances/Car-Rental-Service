@@ -33,7 +33,12 @@
             <label for="dropoffDate"><b>Drop-off Date:</b></label>
             <input type="date" max="9999-12-31" id="dropoffDate" name="dropoffDate" required>
 
-            <button type="submit">Submit Reservation</button>
+                <button type="submit">Submit Reservation</button>
+            </form>
+            
+            
+            </form>
+            
         </form>
     </div>
 
@@ -49,26 +54,29 @@
             return params;
         }
 
-        // Function to fetch car details and display them
-        async function fetchCarDetails() {
-            const queryParams = getQueryParams();
-            const licensePlate = queryParams.licensePlate;
-            if (licensePlate) {
-                try {
-                    const response = await fetch(`http://localhost:3000/vehicles?licensePlate=${licensePlate}`);
-                    if (response.ok) {
-                        const [car] = await response.json();
-                        displayCarDetails(car);
-                    } else {
-                        throw new Error('Failed to fetch car details');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                }
+ // Function to fetch car details and display them
+async function fetchCarDetails() {
+    const queryParams = getQueryParams();
+    const licensePlate = queryParams.licensePlate;
+    if (licensePlate) {
+        try {
+            const response = await fetch(`http://localhost:3000/vehicles?licensePlate=${licensePlate}`);
+            if (response.ok) {
+                const [car] = await response.json();
+                displayCarDetails(car);
+                // Set the vehicleId input field value
+                document.getElementById('vehicleId').value = car._id;
             } else {
-                console.error('License plate not found in URL parameters');
+                throw new Error('Failed to fetch car details');
             }
+        } catch (error) {
+            console.error('Error:', error);
         }
+    } else {
+        console.error('License plate not found in URL parameters');
+    }
+}
+
 
         // Function to display car details in the UI
         function displayCarDetails(vehicle) {
@@ -86,5 +94,6 @@
         // Fetch car details when the page loads
         fetchCarDetails();
     </script>
+    <script src="../js/rental.js"></script> 
 </body>
 </html>
