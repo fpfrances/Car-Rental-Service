@@ -6,6 +6,7 @@ const connectDB = require('./dbConn');
 
 const Vehicle = require('./models/vehicle');
 const Reservation = require('./models/reservation');
+const User = require('./models/user');
 
 const app = express();
 
@@ -119,5 +120,29 @@ app.post('/reservation', async (req, res) => {
     } catch (error) {
         console.error('Error submitting reservation:', error);
         res.status(500).json({ error: 'Error submitting reservation' });
+    }
+});
+
+// POST route to add a new user
+app.post('/users', async (req, res) => {
+    try {
+        const { userName, userEmail, userAddress, userPhone, userPassword } = req.body;
+
+         // Create a new user account
+         const newUser = new User({
+            userName,
+            userAddress,
+            userPhone,
+            userEmail,
+            userPassword
+        });
+
+        // Save the new user to the database
+        await newUser.save();
+
+        res.status(201).json({ message: 'New user submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting new user:', error);
+        res.status(500).json({ error: 'Error submitting new user' });
     }
 });

@@ -16,7 +16,7 @@
     </ul>
     <div class="container">
         <h1 class="title"><b>User Login</b></h1>
-        <form action="#" method="post">
+        <form id="accountForm" action="#" method="post">
             <label for="username"><b>Username / Email:</b></label>
             <input type="text" id="username" name="username" required>
             <label for="password" class="password-toggle"><b>Password:</b></label>
@@ -25,8 +25,8 @@
                 <input type="checkbox" id="showPasswordToggle" onclick="togglePasswordVisibility()">
                 <label for="showPasswordToggle">Show password</label>
             </div>
-            <button type="login"><b>Login</b></button>
-            <li><label onclick="location.href='../pages/form.html'">Don't have an account? Click here</label></li>
+            <button type="submit"><b>Login</b></button>
+            <li><label onclick="location.href='../pages/newUser.html'">Don't have an account? Click here</label></li>
         </form>
     </div>
     <script src="../js/account.js"></script>
