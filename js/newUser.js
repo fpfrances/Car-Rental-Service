@@ -1,3 +1,9 @@
+// Function to toggle password visibility
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('customerPassword');
+    passwordInput.type = (passwordInput.type === 'password') ? 'text' : 'password';
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const reservationForm = document.getElementById('newUserForm');
     reservationForm.addEventListener('submit', async function (event) {
@@ -10,13 +16,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const userPhone = document.getElementById('customerPhone').value;
     const userPassword = document.getElementById('customerPassword').value;
 
+    // Hash the password
+    const userPasswordHashed = await sha256(userPassword);
+
     // Construct request body
     const requestData = {
         userName,
         userEmail,
         userAddress,
         userPhone,
-        userPassword,
+        userPassword: userPasswordHashed,
     };
 
     try {
@@ -42,12 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Error: Account creation failed.');
     }
 });
-
-// Function to toggle password visibility
-function togglePasswordVisibility() {
-    const passwordInput = document.getElementById('customerPassword');
-    passwordInput.type = (passwordInput.type === 'password') ? 'text' : 'password';
-}
 
 // Phone input restrictions
 document.getElementById('customerPhone').addEventListener('input', function(event) {
@@ -79,9 +82,11 @@ document.getElementById('customerEmail').addEventListener('input', function(even
 });
 
 // Function to hash password using SHA-256
-function sha256(str) {
-    const crypto = require('crypto');
-    const hash = crypto.createHash('sha256');
-    hash.update(str);
-    return hash.digest('hex');
+async function sha256(str) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(str);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+    return hashHex;
 }
