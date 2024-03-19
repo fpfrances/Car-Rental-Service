@@ -128,12 +128,12 @@ app.post('/users', async (req, res) => {
     try {
         const { userName, userEmail, userAddress, userPhone, userPassword } = req.body;
 
-         // Create a new user account
-         const newUser = new User({
+        // Create a new user account
+        const newUser = new User({
             userName,
+            userEmail,
             userAddress,
             userPhone,
-            userEmail,
             userPassword
         });
 
@@ -146,3 +146,4 @@ app.post('/users', async (req, res) => {
         res.status(500).json({ error: 'Error submitting new user' });
     }
 });
+
