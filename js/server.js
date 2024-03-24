@@ -55,7 +55,6 @@ app.post('/vehicles', async (req, res) => {
 });
 
 // Server code to fetch all vehicles and implement filtering
-
 app.get('/vehicles', async (req, res) => {
     try {
         let query = {};
@@ -147,3 +146,52 @@ app.post('/users', async (req, res) => {
     }
 });
 
+
+// POST route for login
+app.post('/login', async (req, res) => {
+    const { userEmail, userPassword } = req.body;
+
+    try {
+        // Find the user by email
+        const user = await User.findOne({ userEmail });
+
+        // If user doesn't exist, return error
+        if (!user) {
+            return res.status(401).send('Invalid email');
+        }
+
+        // Function to hash password using SHA-256
+        async function sha256(str) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        // Hash the provided password using SHA-256
+        const hashedPassword = await sha256(userPassword);
+
+        // Compare the hashed password with the hashed password from the database
+        const passwordMatch = hashedPassword === user.userPasswordHashed;
+
+        // If passwords don't match, return error
+        if (!passwordMatch) {
+            return res.status(401).send('Invalid password');
+        }
+
+        // Authentication successful
+        let redirectPage = '/';
+        if (user.userType === 'customer') {
+            redirectPage = '../page/index.html';
+        } else if (user.userType === 'employee') {
+            redirectPage = '../page/indexStaff.html';
+        }
+
+        res.json({ message: 'Login successful', redirect: redirectPage });
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});

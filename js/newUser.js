@@ -39,8 +39,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (response.ok) {
             // Account creation success
-            alert('Account created successfully!');
-            window.location.href = '../pages/account.html'; // Redirect to a new page
+            var secondsLeft = 5;
+            var modal = document.createElement('div');
+            modal.innerHTML = '<div style="position: fixed; top: 15%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border: 1px solid #000;"><p><b>Account created successfully! Redirecting in <span id="countdown">' + secondsLeft + '</span> seconds.</b></p></div>';
+            document.body.appendChild(modal);
+        
+            var countdownElement = document.getElementById('countdown');
+            var countdownInterval = setInterval(function() {
+                secondsLeft--;
+                countdownElement.innerText = secondsLeft;
+                if (secondsLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = '../pages/account.html'; // Redirect after countdown
+                    document.body.removeChild(modal); // Remove modal after redirect
+                }
+            }, 1000); // Update every second (1000 milliseconds)
         } else {
             // Account creation failed
             alert('Error: Account creation failed.');
