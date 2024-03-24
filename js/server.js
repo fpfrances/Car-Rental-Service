@@ -174,7 +174,7 @@ app.post('/login', async (req, res) => {
         const hashedPassword = await sha256(userPassword);
 
         // Compare the hashed password with the hashed password from the database
-        const passwordMatch = hashedPassword === user.userPasswordHashed;
+        const passwordMatch = hashedPassword === user.userPassword;
 
         // If passwords don't match, return error
         if (!passwordMatch) {
@@ -184,9 +184,9 @@ app.post('/login', async (req, res) => {
         // Authentication successful
         let redirectPage = '/';
         if (user.userType === 'customer') {
-            redirectPage = '../page/index.html';
+            redirectPage = '../pages/index.html';
         } else if (user.userType === 'employee') {
-            redirectPage = '../page/indexStaff.html';
+            redirectPage = '../pages/indexStaff.html';
         }
 
         res.json({ message: 'Login successful', redirect: redirectPage });
