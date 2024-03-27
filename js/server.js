@@ -122,6 +122,7 @@ app.post('/reservation', async (req, res) => {
     }
 });
 
+
 // POST route to add a new user
 app.post('/users', async (req, res) => {
     try {
@@ -147,6 +148,7 @@ app.post('/users', async (req, res) => {
 });
 
 
+
 // POST route for login
 app.post('/login', async (req, res) => {
     const { userEmail, userPassword } = req.body;
@@ -169,7 +171,7 @@ app.post('/login', async (req, res) => {
             const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
             return hashHex;
         }
-
+      
         // Hash the provided password using SHA-256
         const hashedPassword = await sha256(userPassword);
 
@@ -193,5 +195,39 @@ app.post('/login', async (req, res) => {
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).json({ error: 'Internal server error' });
+    }
+});
+      
+      
+// Route to handle returning a vehicle
+app.post('/return', async (req, res) => {
+    try {
+        const { customerName, customerEmail } = req.body;
+
+        // Find the reservation based on customer name and email
+        const reservation = await Reservation.findOne({ customerName, customerEmail });
+
+        if (!reservation) {
+            return res.status(404).json({ error: 'Reservation not found' });
+        }
+
+        // Find the vehicle based on the reservation's VehicleID
+        const vehicle = await Vehicle.findById(reservation.VehicleID);
+
+        if (!vehicle) {
+            return res.status(404).json({ error: 'Vehicle not found' });
+        }
+
+        // Change the vehicle's status to 'A' (Available)
+        vehicle.status = 'A';
+        await vehicle.save();
+
+        // Delete the reservation
+        await Reservation.findByIdAndDelete(reservation._id);
+
+        res.status(200).json({ message: 'Vehicle returned successfully' });
+    } catch (error) {
+        console.error('Error returning vehicle:', error);
+        res.status(500).json({ error: 'Error returning vehicle' });
     }
 });

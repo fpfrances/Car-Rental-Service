@@ -16,67 +16,16 @@
         <li><button onclick="location.href='about.html'"><b>About Us</b></button></li>
     </ul>
     <div class="container">
-        <h1 class="title"><b>Car Rental Return</b></h1>
-        <div id="carDetails"></div>
-        <form id="returnForm" action="#" method="post">
-            <label for="rentalId"><b>Rental Id</b></label>
-            <input type="text" id="rentalId" name="rentalId" required>
-
-            <label for="customerName"><b>Customer Name:</b></label>
-            <input type="text" id="customerName" name="customerName" required>
-
-            <button type="submit">Start Return</button>
+        <h1 class="title"><b>Search Reservations</b></h1>
+        <form id="searchForm">
+            <label for="searchCustomerName">Customer Name:</label>
+            <input type="text" id="searchCustomerName" name="searchCustomerName">
+            <label for="searchCustomerEmail">Customer Email:</label>
+            <input type="text" id="searchCustomerEmail" name="searchCustomerEmail">
+            <button type="submit">Search</button>
         </form>
-    </div>
+    <div id="searchResults"></div>
 
-    <script>
-        // Function to extract query parameters from URL
-        function getQueryParams() {
-            const params = {};
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            for (const [key, value] of urlParams) {
-                params[key] = value;
-            }
-            return params;
-        }
-
-        // Function to fetch car details and display them
-        async function fetchCarDetails() {
-            const queryParams = getQueryParams();
-            const licensePlate = queryParams.licensePlate;
-            if (licensePlate) {
-                try {
-                    const response = await fetch(`http://localhost:3000/vehicles?licensePlate=${licensePlate}`);
-                    if (response.ok) {
-                        const [car] = await response.json();
-                        displayCarDetails(car);
-                    } else {
-                        throw new Error('Failed to fetch car details');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            } else {
-                console.error('License plate not found in URL parameters');
-            }
-        }
-
-        // Function to display car details in the UI
-        function displayCarDetails(vehicle) {
-            const carDetailsDiv = document.getElementById('carDetails');
-            carDetailsDiv.innerHTML = `
-                <h2>Car Details</h2>
-                <p><b>Manufacturer:</b> ${vehicle.manufacturer}</p>
-                <p><b>Model:</b> ${vehicle.vehicleName}</p>
-                <p><b>Year:</b> ${vehicle.year}</p>
-                <p><b>Color:</b> ${vehicle.color}</p>
-                <p><b>License Plate:</b> ${vehicle.licensePlate}</p>
-            `;
-        }
-
-        // Fetch car details when the page loads
-        fetchCarDetails();
-    </script>
+    <script src="../js/return.js"></script>
 </body>
 </html>

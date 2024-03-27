@@ -1,3 +1,5 @@
+let totalFines = 100; //Each Rental has an initial cost of $100
+
 function addDamageInstance() {
     const damageInstances = document.getElementById('damageInstances');
     const newDamageInstance = document.createElement('div');
@@ -25,8 +27,6 @@ function calculateTotal() {
     const emptyTankCheckbox = document.getElementById('emptyTankCheckbox');
     const damageInstances = document.querySelectorAll('.damage-instance');
 
-    let totalFines = 0;
-
     if (lateDropOffCheckbox.checked) {
         totalFines += 100;
     }
@@ -50,4 +50,25 @@ function calculateTotal() {
     });
 
     document.getElementById('totalFines').innerText = `Total Fines: $${totalFines}`;
+}
+
+function printReceipt() {
+        // Gather receipt information
+        const date = new Date().toLocaleDateString();
+    
+        // Construct the HTML content of the receipt
+        const receiptContent = `
+            <h1>Receipt</h1>
+            <p><strong>Thank You!</strong></p>
+            <p><strong>Rental Date:</strong> ${date}</p>
+            <p><strong>Total Price:</strong> ${totalFines}</p>
+            <!-- Add more receipt details as needed -->
+        `;
+    
+        // Open a new browser window or tab with the receipt content
+        const receiptWindow = window.open('', '_blank');
+        receiptWindow.document.body.innerHTML = receiptContent;
+    
+        // Print the receipt
+        receiptWindow.print();
 }
