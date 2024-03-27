@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Vehicle returned successfully
                 const responseData = await response.json();
                 alert(responseData.message); // Display success message
-                // Optionally, update the UI or redirect to another page
+                // redirect to Fines page
+                window.location.href = 'fines.html'
             } else {
                 // Error returning vehicle
                 const errorText = await response.text();

@@ -24,22 +24,22 @@
         </b></p>
         <ul>
             <li>
-                Late Drop Off:
+                <label for="LateDropOffCheckbox">Late Drop Off:</label>
                 <input type="checkbox" id="LateDropOffCheckbox" name="LateDropOffCheckbox" onchange="calculateTotal()">
                 $100 fine
             </li>
             <li>
-                Cleaning Fee:
+                <label for="CleaningFeeCheckbox">Cleaning Fee:</label>
                 <input type="checkbox" id="CleaningFeeCheckbox" name="CleaningFeeCheckbox" onchange="calculateTotal()">
                 $50 fine
             </li>
             <li>
-                Smoking in the car:
+                <label for="smokingCheckbox">Smoking Fee:</label>
                 <input type="checkbox" id="smokingCheckbox" name="smokingCheckbox" onchange="calculateTotal()">
                 $50 fine
             </li>
             <li>
-                Empty tank of gas:
+                <label for="emptyTankCheckbox">Refuel Fee:</label>
                 <input type="checkbox" id="emptyTankCheckbox" name="emptyTankCheckbox" onchange="calculateTotal()">
                 $40 fine
             </li>
@@ -51,7 +51,7 @@
                 <div id="damageInstances">
                     <div class="damage-instance">
                         <label for="damageType">Damage Type:</label>
-                        <select class="damageType" name="damageType[]" onchange="calculateTotal()">
+                        <select id="damageType" class="damageType" name="damageType[]" onchange="calculateTotal()">
                             <option value="scratch">Scratch</option>
                             <option value="dent">Dent</option>
                             <option value="brokenMirror">Broken Mirror</option>
@@ -66,7 +66,7 @@
             </li>
         </ul>
         <p id="totalFines">Total Fines: $0</p>
-        <button type="printReceipt">Print Receipt</button>
+        <button type="button" onclick="printReceipt()">Print Receipt</button>
     </div>
     <script src="../js/fines.js"></script>     
 </body>
