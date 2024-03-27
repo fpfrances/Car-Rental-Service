@@ -4,6 +4,7 @@
   "description": "By: Brayden Antonelli, Jacob Lingo, Filipe Pestana Frances(Everyone Else Add Names)",
   "main": "server.js",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "bson": "^6.3.0",
     "cors": "^2.8.5",
