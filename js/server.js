@@ -121,3 +121,38 @@ app.post('/reservation', async (req, res) => {
         res.status(500).json({ error: 'Error submitting reservation' });
     }
 });
+
+// Route to handle returning rentals based on search criteria
+app.get('/return', async (req, res) => {
+    try {
+        let query = {};
+
+        // Retrieve search parameters from the query string
+        const { customerName, customerEmail, customerAddress, pickupDate, dropoffDate } = req.query;
+
+        // Construct the query based on the search parameters
+        if (customerName) {
+            query.customerName = customerName;
+        }
+        if (customerEmail) {
+            query.customerEmail = customerEmail;
+        }
+        if (customerAddress) {
+            query.customerAddress = customerAddress;
+        }
+        if (pickupDate) {
+            query.pickupDate = pickupDate;
+        }
+        if (dropoffDate) {
+            query.dropoffDate = dropoffDate;
+        }
+
+        // Find rentals based on the constructed query
+        const rentals = await Reservation.find(query);
+        res.json(rentals);
+    } catch (error) {
+        console.error('Error fetching rentals:', error);
+        res.status(500).json({ error: 'Error fetching rentals' });
+    }
+});
+
