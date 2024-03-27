@@ -122,37 +122,35 @@ app.post('/reservation', async (req, res) => {
     }
 });
 
-// Route to handle returning rentals based on search criteria
-app.get('/return', async (req, res) => {
+// Route to handle returning a vehicle
+app.post('/return', async (req, res) => {
     try {
-        let query = {};
+        const { customerName, customerEmail } = req.body;
 
-        // Retrieve search parameters from the query string
-        const { customerName, customerEmail, customerAddress, pickupDate, dropoffDate } = req.query;
+        // Find the reservation based on customer name and email
+        const reservation = await Reservation.findOne({ customerName, customerEmail });
 
-        // Construct the query based on the search parameters
-        if (customerName) {
-            query.customerName = customerName;
-        }
-        if (customerEmail) {
-            query.customerEmail = customerEmail;
-        }
-        if (customerAddress) {
-            query.customerAddress = customerAddress;
-        }
-        if (pickupDate) {
-            query.pickupDate = pickupDate;
-        }
-        if (dropoffDate) {
-            query.dropoffDate = dropoffDate;
+        if (!reservation) {
+            return res.status(404).json({ error: 'Reservation not found' });
         }
 
-        // Find rentals based on the constructed query
-        const rentals = await Reservation.find(query);
-        res.json(rentals);
+        // Find the vehicle based on the reservation's VehicleID
+        const vehicle = await Vehicle.findById(reservation.VehicleID);
+
+        if (!vehicle) {
+            return res.status(404).json({ error: 'Vehicle not found' });
+        }
+
+        // Change the vehicle's status to 'A' (Available)
+        vehicle.status = 'A';
+        await vehicle.save();
+
+        // Delete the reservation
+        await Reservation.findByIdAndDelete(reservation._id);
+
+        res.status(200).json({ message: 'Vehicle returned successfully' });
     } catch (error) {
-        console.error('Error fetching rentals:', error);
-        res.status(500).json({ error: 'Error fetching rentals' });
+        console.error('Error returning vehicle:', error);
+        res.status(500).json({ error: 'Error returning vehicle' });
     }
 });
-

@@ -1,49 +1,41 @@
 document.addEventListener('DOMContentLoaded', function () {
     const searchForm = document.getElementById('searchForm');
-    const searchResultsDiv = document.getElementById('searchResults');
-
-    searchForm.addEventListener('submit', async function (event) {
+    searchForm.addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent form submission
-    
-        const searchParams = {
-            customerName: document.getElementById('searchCustomerName').value,
-            customerEmail: document.getElementById('searchCustomerEmail').value,
-            customerAddress: document.getElementById('searchCustomerAddress').value,
-            pickupDate: document.getElementById('searchPickupDate').value,
-            dropoffDate: document.getElementById('searchDropoffDate').value,
+
+        // Extract form data
+        const customerName = document.getElementById('searchCustomerName').value;
+        const customerEmail = document.getElementById('searchCustomerEmail').value;
+
+        // Construct request body
+        const formData = {
+            customerName,
+            customerEmail
         };
 
         try {
-            const queryString = Object.keys(searchParams).map(key => key + '=' + encodeURIComponent(searchParams[key])).join('&');
-
-            const response = await fetch('/return?' + queryString);
-            if (!response.ok) {
-                throw new Error('Failed to fetch reservations');
+            const response = await fetch('http://localhost:3000/return', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            if (response.ok) {
+                // Vehicle returned successfully
+                const responseData = await response.json();
+                alert(responseData.message); // Display success message
+                // Optionally, update the UI or redirect to another page
+            } else {
+                // Error returning vehicle
+                const errorText = await response.text();
+                alert(errorText); // Display error message returned from the server
             }
-
-            const rentals = await response.json();
-            displayRentals(rentals)
         } catch (error) {
-            console.error('Error!', error);
-            searchResultsDiv.textContent = 'Failed to submit reservation. Please try again later.';
+            console.error('Error:', error);
+            // Handle other errors
+            alert('An error occurred. Please try again later.');
         }
     });
-
-    function displayRentals(rentals) {
-        // Clear any previous search results
-        searchResultsDiv.innerHTML = '';
-
-        // Display each reservation
-        rentals.forEach(rental => {
-            const rentalDiv = document.createElement('div');
-            rentalDiv.innerHTML = `
-            <p><b>Customer Name:</b> ${rental.customerName}</p>
-            <p><b>Customer Email:</b> ${rental.customerEmail}</p>
-            <p><b>Pickup Date:</b> ${new Date(rental.pickupDate).toLocaleDateString()}</p>
-            <p><b>Dropoff Date:</b> ${new Date(rental.dropoffDate).toLocaleDateString()}</p>
-            <hr></hr>
-            `;
-        searchResultsDiv.appendChild(rentalDiv);
-        });
-    }
 });
