@@ -186,7 +186,7 @@ app.post('/login', async (req, res) => {
         // Authentication successful
         let redirectPage = '/';
         if (user.userType === 'customer') {
-            redirectPage = '../pages/index.html';
+            redirectPage = '../pages/indexCustomer.html';
         } else if (user.userType === 'employee') {
             redirectPage = '../pages/indexStaff.html';
         }

@@ -31,3 +31,19 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+// Phone input restrictions
+document.getElementById('phoneId').addEventListener('input', function(event) {
+    const input = event.target;
+    const inputValue = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+
+    // Format the phone number
+    let formattedNumber = '(' + inputValue.substring(0, 3);
+    if (inputValue.length > 3) {
+        formattedNumber += ') ' + inputValue.substring(3, 6);
+    }
+    if (inputValue.length > 6) {
+        formattedNumber += '-' + inputValue.substring(6, 10);
+    }
+    input.value = formattedNumber;
+});
