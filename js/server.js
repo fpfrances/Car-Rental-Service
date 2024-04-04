@@ -231,3 +231,25 @@ app.post('/return', async (req, res) => {
         res.status(500).json({ error: 'Error returning vehicle' });
     }
 });
+
+app.put('/maintenance', async (req, res) => {
+    try {
+        const licensePlate = req.body.licensePlate;
+        //Find vehicle
+        const vehicle = await Vehicle.findOne( {licensePlate} );
+        //Return 404 error if not found
+        if(!vehicle){
+            return res.status(404).json( {error: 'Vehicle not found' });
+        }
+        //update and save changes
+        vehicle.status = 'M';
+        await vehicle.save();
+
+        res.status(201).json( {message: 'Car successfully scheduled for maintenance.'});
+    } catch (error){
+        console.error('Error scheduling maintenance', error);
+        res.status(500).json( {error: 'Error scheduling maintenance'} );
+    }
+});
+
+

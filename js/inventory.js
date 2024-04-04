@@ -70,10 +70,13 @@ function displaySearchResults(data) {
             html += 'Available';
             // Add rent button for available vehicles
             html += `<button class="rent-button" data-license-plate="${vehicle.licensePlate}">Rent</button>`;
+            //Maintenance buttons for vehicles
+            html += `<button class="maintenance-button" data-license-plate="${vehicle.licensePlate}">Maintenance</button>`;
         } else if (vehicle.status === 'O') {
             html += 'Out';
         } else if (vehicle.status === 'M') {
             html += 'Maintenance';
+            //Attach note here
         }
         html += '<br>';
         html += '</div>';
@@ -89,6 +92,18 @@ function displaySearchResults(data) {
         button.addEventListener('click', function() {
             const licensePlate = this.getAttribute('data-license-plate');
             rentCar(licensePlate);
+        });
+    });
+
+    //Event listeners to maintenance buttons
+    const maintButtons = document.querySelectorAll('.maintenance-button');
+    maintButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            //const licensePlate = this.getAttribute('data-license-plate');
+            //enterCarToMaintenance(licensePlate);
+            //const redirectTo = `report.html?manufacturer=${encodeURIComponent(vehicle.manufacturer)}&vehicleName=${encodeURIComponent(vehicle.vehicleName)}&year=${encodeURIComponent(vehicle.year)}&licensePlate=${encodeURIComponent(vehicle.licensePlate)}`;
+            const redirectTo = `report.html?licensePlate=${vehicle.licensePlate}`;
+            window.location.href = redirectTo;
         });
     });
 }
@@ -122,3 +137,29 @@ function renderSearchResults(vehicles) {
     });
 }
 
+async function enterCarToMaintenance( licensePlate ){
+
+    const requestData = { licensePlate };
+
+    try {
+        // Send request to the endpoint
+        const response = await fetch('http://localhost:3000/maintenance', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to submit maintenance');
+        }
+
+        const responseData = await response.json();
+        alert(responseData.message); // Show success message
+    } catch (error) {
+        console.error('Error scheduling maintenance:', error);
+        alert('Failed to schedule maintenance. Please try again later.');
+    }
+    
+}
