@@ -17,7 +17,7 @@
     </ul>
     <div class="container">
         <h1 class="title"><b>Contact Us</b></h1>
-        <form action="#" method="post">
+        <form action="#" method="post" id="contactForm">
             <label for="nameId"><b>Name:</b></label>
             <input type="text" id="nameId" name="nameId" required>
             
@@ -28,10 +28,16 @@
             <input type="text" id="phoneId" name="phoneId" required>
 
             <label for="returnCondition"><b>Message:</b></label>
-            <textarea id="returnCondition" name="returnCondition" rows="6" cols="42" required></textarea>
+            <textarea id="returnCondition" name="returnCondition" rows="6" cols="39" required></textarea>
 
-            <button type="submit"><b>Submit</b></button>
+            <button type="button" onclick="submitForm()"><b>Submit</b></button>
         </form>
     </div>
+    <div id="returnMessage" class="messageBox">
+        <div class="modal-content" style="text-align: center;">
+            <p><b>Thank you for contacting us. We will get back to you as soon as possible.</b></p>
+        </div>
+    </div>
+    <script src="../js/contact.js"></script>
 </body>
 </html>
