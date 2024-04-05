@@ -102,7 +102,8 @@ function displaySearchResults(data) {
             //const licensePlate = this.getAttribute('data-license-plate');
             //enterCarToMaintenance(licensePlate);
             //const redirectTo = `report.html?manufacturer=${encodeURIComponent(vehicle.manufacturer)}&vehicleName=${encodeURIComponent(vehicle.vehicleName)}&year=${encodeURIComponent(vehicle.year)}&licensePlate=${encodeURIComponent(vehicle.licensePlate)}`;
-            const redirectTo = `report.html?licensePlate=${vehicle.licensePlate}`;
+            const licensePlate = this.getAttribute('data-license-plate');
+            const redirectTo = `report.html?licensePlate=${licensePlate}`;
             window.location.href = redirectTo;
         });
     });

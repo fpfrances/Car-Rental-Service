@@ -252,4 +252,13 @@ app.put('/maintenance', async (req, res) => {
     }
 });
 
+//Route for handling maintenance report submission
+app.post('/maintenanceReportSubmission', async (req, res) => {
+    try {
+        
+    } catch (error){
+        console.error('Error scheduling maintenance', error);
+        res.status(500).json( {error: 'Error scheduling maintenance'} );
+    }
+});
 

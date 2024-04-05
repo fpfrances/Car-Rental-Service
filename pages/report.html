@@ -18,7 +18,8 @@
     </ul>
     <div class="container">
         <h1 class="title"><b>Report Car Maintenance</b></h1>
-        <form action="#" method="post">
+        <div id="carDetails"></div>
+        <form action="/maintenanceReportSubmission" method="post">
             <label for="returnDate"><b>Expected Return Date:</b></label>
             <input type="date" max="9999-12-31" id="returnDate" name="returnDate" required>
 
@@ -28,6 +29,53 @@
             <button type="submit"><b>Submit Report</b></button>
         </form>
     </div>
+    <script>
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            for (const [key, value] of urlParams) {
+                params[key] = value;
+            }
+            return params;
+        }
+
+        async function fetchCarDetails() {
+            const queryParams = getQueryParams();
+            const licensePlate = queryParams.licensePlate;
+            if (licensePlate) {
+                try {
+                    const response = await fetch(`http://localhost:3000/vehicles?licensePlate=${licensePlate}`);
+                    if (response.ok) {
+                        const [car] = await response.json();
+                        displayCarDetails(car);
+                        // Set the vehicleId input field value
+                        document.getElementById('vehicleId').value = car._id;
+                    } else {
+                        throw new Error('report: Failed to fetch car details');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            } else {
+                console.error('License plate not found in URL parameters');
+            }
+        }
+        // Function to display car details in the UI
+        function displayCarDetails(vehicle) {
+            const carDetailsDiv = document.getElementById('carDetails');
+            carDetailsDiv.innerHTML = `
+                <h2>Car Details</h2>
+                <p><b>Manufacturer:</b> ${vehicle.manufacturer}</p>
+                <p><b>Model:</b> ${vehicle.vehicleName}</p>
+                <p><b>Year:</b> ${vehicle.year}</p>
+                <p><b>Color:</b> ${vehicle.color}</p>
+                <p><b>License Plate:</b> ${vehicle.licensePlate}</p>
+            `;
+        }
+
+        fetchCarDetails();
+    </script>
     <script src="../js/report.js"></script>   
 </body>
 </html>
