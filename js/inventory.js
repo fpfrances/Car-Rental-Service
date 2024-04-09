@@ -76,7 +76,9 @@ function displaySearchResults(data) {
             html += 'Out';
         } else if (vehicle.status === 'M') {
             html += 'Maintenance';
-            //Attach note here
+            html += `<button class="exit-maintenance-button" data-license-plate="${vehicle.licensePlate}">End Maintenance</button>`;
+            const maint = findMaintenanceForVehicle(vehicle.licensePlate);
+            html += maint.details;
         }
         html += '<br>';
         html += '</div>';
@@ -95,16 +97,22 @@ function displaySearchResults(data) {
         });
     });
 
-    //Event listeners to maintenance buttons
+    //Event listeners to enter maintenance buttons
     const maintButtons = document.querySelectorAll('.maintenance-button');
     maintButtons.forEach(button => {
         button.addEventListener('click', function() {
-            //const licensePlate = this.getAttribute('data-license-plate');
-            //enterCarToMaintenance(licensePlate);
-            //const redirectTo = `report.html?manufacturer=${encodeURIComponent(vehicle.manufacturer)}&vehicleName=${encodeURIComponent(vehicle.vehicleName)}&year=${encodeURIComponent(vehicle.year)}&licensePlate=${encodeURIComponent(vehicle.licensePlate)}`;
             const licensePlate = this.getAttribute('data-license-plate');
             const redirectTo = `report.html?licensePlate=${licensePlate}`;
             window.location.href = redirectTo;
+        });
+    });
+
+    //Adding event listeners to end maintenance buttons
+    const endMaintButtons = document.querySelectorAll('.exit-maintenance-button');
+    endMaintButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const licensePlate = this.getAttribute('data-license-plate');
+            deleteMaintenance(licensePlate);
         });
     });
 }
@@ -138,29 +146,51 @@ function renderSearchResults(vehicles) {
     });
 }
 
-async function enterCarToMaintenance( licensePlate ){
+async function findMaintenanceForVehicle( licensePlate ){
 
-    const requestData = { licensePlate };
-
+    //Calling endpoint to find maintenance for this vehicle
     try {
-        // Send request to the endpoint
-        const response = await fetch('http://localhost:3000/maintenance', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestData)
+        const response =  await fetch(`http://localhost:3000/findMaintenance?licensePlate=${licensePlate}`, {
+            method: 'GET', 
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to submit maintenance');
+        if(!response.ok) {
+            throw new Error('Failed to find maintenance');
         }
 
         const responseData = await response.json();
-        alert(responseData.message); // Show success message
-    } catch (error) {
-        console.error('Error scheduling maintenance:', error);
-        alert('Failed to schedule maintenance. Please try again later.');
+        alert(responseData.message);
+        return responseData;
+
+    } catch(error) {
+        console.error('Error finding maintenance for vehicle', error);
+        alert('Failed to find maintenance for vehicle');
     }
-    
+}
+
+async function deleteMaintenance( licenseplate ){
+
+    const requestData = {licensePlate: licenseplate};
+    //Calls the endpoint that will delete the maintenance document pertaining to the license plate
+    try {
+        const response =  await fetch('http://localhost:3000/exit-maintenance', {
+            method: 'DELETE', 
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify(requestData)
+        });
+
+        if(!response.ok) {
+            throw new Error('Failed to find maintenance');
+        }
+
+        const responseData = await response.json();
+        alert(responseData.message);
+        return responseData;
+
+    } catch(error) {
+        console.error('Error finding maintenance for vehicle', error);
+        alert('Failed to find maintenance for vehicle');
+    }
 }

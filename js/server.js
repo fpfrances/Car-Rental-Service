@@ -7,6 +7,7 @@ const connectDB = require('./dbConn');
 const Vehicle = require('./models/vehicle');
 const Reservation = require('./models/reservation');
 const User = require('./models/user');
+const Maintenance = require('./models/maintenance');
 
 const app = express();
 
@@ -232,33 +233,82 @@ app.post('/return', async (req, res) => {
     }
 });
 
-app.put('/maintenance', async (req, res) => {
+//Route for handling maintenance report form submission
+app.post('/maintenanceReportSubmission', async (req, res) => {
     try {
         const licensePlate = req.body.licensePlate;
-        //Find vehicle
+        const expectedReturnDate = req.body.expectedReturnDate;
+        const details = req.body.details;
+        //Find the car that is being entered into maintenance
         const vehicle = await Vehicle.findOne( {licensePlate} );
-        //Return 404 error if not found
+        //Return error if not found
         if(!vehicle){
             return res.status(404).json( {error: 'Vehicle not found' });
         }
-        //update and save changes
+        //update vehicle status and save the changes
         vehicle.status = 'M';
         await vehicle.save();
+        //const vehicleID = vehicle._id;
 
-        res.status(201).json( {message: 'Car successfully scheduled for maintenance.'});
+        const newMaintenance = new Maintenance({ 
+            details, 
+            expectedReturnDate, 
+            VehicleId: vehicle._id
+        });
+
+        await newMaintenance.save();
+
+        res.status(201).json({ message: 'Maintenance report submitted succesfully'});
+
     } catch (error){
         console.error('Error scheduling maintenance', error);
         res.status(500).json( {error: 'Error scheduling maintenance'} );
     }
 });
 
-//Route for handling maintenance report submission
-app.post('/maintenanceReportSubmission', async (req, res) => {
+//Finds the maintenance for a vehicle
+app.get('/findMaintenance', async (req, res) => {
+    try{
+        const licensePlate = req.query.licensePlate;
+        //Find the vehicle
+        const vehicle = await Vehicle.findOne( {licensePlate} );
+        //Find the maintenance for the given vehicle
+        const vid = vehicle._id;
+        const maintenance = await Maintenance.findOne( {vid} );
+        if(!maintenance){
+            return res.status(404).json({error: 'Maintenance not found'});
+        }
+        res.status(200).json({maintenance});
+    } catch (error) {
+        console.error('Error finding maintenance', error);
+        res.status(500).json({ error: 'Error finding maintenance'});
+    }
+});
+
+//Route that deletes the maintenance 
+//Commented out the find and delete since it would always just return maintenance not found
+app.delete('/exit-maintenance', async (req, res) => {
     try {
         
-    } catch (error){
-        console.error('Error scheduling maintenance', error);
-        res.status(500).json( {error: 'Error scheduling maintenance'} );
+        const queryObj = req.body;
+        /*
+        const deletedMaintenance = await Maintenance.findOneAndDelete( queryObj );
+        if(!deletedMaintenance){
+            return res.status(404).json({error: 'Maintenance not found'});
+        }
+        */
+        //find and change status of the vehicle back to available
+        const vehicle = await Vehicle.findOne(queryObj);
+        //const vehicle = await Vehicle.findById(deletedMaintenance.VehicleID);
+        if (!vehicle) {
+            return res.status(404).json({ error: 'Vehicle not found' });
+        }
+        vehicle.status = 'A';
+        await vehicle.save();
+        
+        res.status(200).json({message: 'Maintenance was succesfully deleted'});
+    }catch(error) {
+        console.error('Error deleting maintenance: ', error);
+        res.status(500).json({error: 'Error deleting maintenance'});
     }
-});
-
+})
