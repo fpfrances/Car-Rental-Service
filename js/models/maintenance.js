@@ -10,7 +10,7 @@ const maintenanceSchema = new mongoose.Schema({
         type: Date, 
         required: [true, 'Expected Return Date is required']
     }, 
-    VehicleId: String
+    licensePlate: String // Store the license plate instead of the VehicleId
 });
 
 module.exports = mongoose.model('Maintenance', maintenanceSchema);
