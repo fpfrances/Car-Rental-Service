@@ -125,10 +125,11 @@ async function displaySearchResults(data) {
         button.addEventListener('click', function() {
             const licensePlate = this.getAttribute('data-license-plate');
             deleteMaintenance(licensePlate);
+            const redirectTo = `completeMaint.html?licensePlate=${licensePlate}`
              // Wait for 2 seconds before reloading the page
-        setTimeout(() => {
+        /*setTimeout(() => {
             location.reload();
-        }, 2000);
+        }, 2000);*/
         });
     });
 }
