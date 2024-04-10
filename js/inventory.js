@@ -79,15 +79,18 @@ async function displaySearchResults(data) {
         html += '<b>Status:</b> ';
         if (vehicle.status === 'A') {
             html += 'Available';
+            html += '<br>';
             // Add rent button for available vehicles
             html += `<button class="rent-button" data-license-plate="${vehicle.licensePlate}">Rent</button>`;
+            html += '<br>';
             // Maintenance button for vehicles
-            html += `<button class="maintenance-button" data-license-plate="${vehicle.licensePlate}">Maintenance</button>`;
+            html += `<button class="maintenance-button" data-license-plate="${vehicle.licensePlate}">Initiate Service</button>`;
         } else if (vehicle.status === 'O') {
             html += 'Out';
         } else if (vehicle.status === 'M') {
-            html += 'Maintenance';
-            html += `<button class="exit-maintenance-button" data-license-plate="${vehicle.licensePlate}">End Maintenance</button>`;
+            html += 'In Service';
+            html += '<br>';
+            html += `<button class="exit-maintenance-button" data-license-plate="${vehicle.licensePlate}">Complete Maintenance</button>`;
         }
         html += '<br>';
         html += '</li>';
