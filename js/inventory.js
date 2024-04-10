@@ -125,7 +125,8 @@ async function displaySearchResults(data) {
         button.addEventListener('click', function() {
             const licensePlate = this.getAttribute('data-license-plate');
             deleteMaintenance(licensePlate);
-            const redirectTo = `completeMaint.html?licensePlate=${licensePlate}`
+            const redirectTo = `completeMaint.html?licensePlate=${licensePlate}`;
+            window.location.href = redirectTo;
              // Wait for 2 seconds before reloading the page
         /*setTimeout(() => {
             location.reload();
