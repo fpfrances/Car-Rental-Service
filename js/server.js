@@ -7,6 +7,7 @@ const connectDB = require('./dbConn');
 const Vehicle = require('./models/vehicle');
 const Reservation = require('./models/reservation');
 const User = require('./models/user');
+const Maintenance = require('./models/maintenance');
 
 const app = express();
 
@@ -229,5 +230,92 @@ app.post('/return', async (req, res) => {
     } catch (error) {
         console.error('Error returning vehicle:', error);
         res.status(500).json({ error: 'Error returning vehicle' });
+    }
+});
+
+//Route for handling maintenance report form submission
+app.post('/maintenanceReportSubmission', async (req, res) => {
+    try {
+        const licensePlate = req.body.licensePlate;
+        const expectedReturnDate = req.body.expectedReturnDate;
+        const details = req.body.details;
+
+        //Find the vehicle that is being entered into maintenance using its license plate
+        const vehicle = await Vehicle.findOne({ licensePlate });
+
+        //Return error if vehicle not found
+        if (!vehicle) {
+            return res.status(404).json({ error: 'Vehicle not found' });
+        }
+
+        // Update vehicle status to 'M' (Maintenance) and save the changes
+        vehicle.status = 'M';
+        await vehicle.save();
+
+        // Create a new maintenance document
+        const newMaintenance = new Maintenance({
+            details,
+            expectedReturnDate,
+            licensePlate // Store vehicle's license plate in the maintenance record
+        });
+
+        // Save the maintenance record to the database
+        await newMaintenance.save();
+
+        res.status(201).json({ message: 'Maintenance report submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting maintenance report:', error);
+        res.status(500).json({ error: 'Error submitting maintenance report' });
+    }
+});
+
+// Finds the maintenance for a vehicle
+app.get('/findMaintenance', async (req, res) => {
+    try {
+        const licensePlate = req.query.licensePlate;
+
+        // Find the maintenance for the given vehicle's license plate
+        const maintenance = await Maintenance.findOne({ licensePlate });
+
+        if (!maintenance) {
+            return res.status(404).json({ error: 'Maintenance not found' });
+        }
+        res.status(200).json({ maintenance });
+    } catch (error) {
+        console.error('Error finding maintenance', error);
+        res.status(500).json({ error: 'Error finding maintenance' });
+    }
+});
+
+// Route that deletes the maintenance
+app.delete('/exit-maintenance', async (req, res) => {
+    try {
+        const licensePlate = req.body.licensePlate;
+
+        console.log('Received request to exit maintenance for vehicle with license plate:', licensePlate);
+
+        // Find and check the maintenance record associated with the vehicle's license plate
+        const maintenance = await Maintenance.findOne({ licensePlate });
+
+        // Find the vehicle by its license plate
+        const vehicle = await Vehicle.findOne({ licensePlate });
+
+        console.log('Found vehicle:', vehicle);
+
+        // Change the vehicle's status back to 'A' (Available)
+        vehicle.status = 'A';
+        await vehicle.save();
+
+        console.log('Vehicle status updated to Available');
+
+        // Delete the maintenance record associated with the vehicle's license plate
+        await Maintenance.findOneAndDelete({ licensePlate });
+
+        console.log('Maintenance record deleted successfully');
+
+        res.status(201).json({ message: 'Maintenance record deleted successfully' });
+    } catch (error) {
+        console.error('Error during maintenance deletion:', error);
+        return res.status(500).json({ error: 'Failed to delete maintenance record' });
     }
 });

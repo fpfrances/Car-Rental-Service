@@ -1,5 +1,5 @@
 # Car-Rental-Service
-By: Brayden Antonelli, Jacob Lingo, Filipe Pestana Frances, Ryan Pettit
+By: Brayden Antonelli, Jacob Lingo, Filipe Pestana Frances, Ryan Pettit, Brandon Lora
 
 5) Car rental software
    

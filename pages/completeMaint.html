@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knights Auto - Car Return Report</title>
+    <title>Knights Auto - Complete Maintenance</title>
     <link rel="stylesheet" media="screen and (min-width: 120px)" type="text/css" href="../css/report.css">
 </head>
 <body>
@@ -16,6 +16,7 @@
         <li><button onclick="location.href='contact.html'"><b>Contact Us</b></button></li>
         <li><button onclick="location.href='about.html'"><b>About Us</b></button></li>
     </ul>
+    <!--
     <div class="container">
         <h1 class="title"><b>Report Car Maintenance</b></h1>
         <div id="carDetails"></div>
@@ -28,6 +29,13 @@
 
             <button type="submit"><b>Submit Report</b></button>
         </form>
+    </div>
+    -->
+    <div class="container">
+        <h1 class="title"><b>Maintenance Completed</b></h1>
+        <h2>The following car has completed its service: </h2>
+        <div id="carDetails"></div>
+        <button class="returnToInventory">Return To Inventory</button>
     </div>
     <script>
         function getQueryParams() {
@@ -65,7 +73,7 @@
         function displayCarDetails(vehicle) {
             const carDetailsDiv = document.getElementById('carDetails');
             carDetailsDiv.innerHTML = `
-                <h2>Car Details</h2>
+                <h3>Car Details</h3>
                 <p><b>Manufacturer:</b> ${vehicle.manufacturer}</p>
                 <p><b>Model:</b> ${vehicle.vehicleName}</p>
                 <p><b>Year:</b> ${vehicle.year}</p>
@@ -76,6 +84,6 @@
 
         fetchCarDetails();
     </script>
-    <script src="../js/report.js"></script>   
+    <script src="../js/completeMaint.js"></script>   
 </body>
 </html>
