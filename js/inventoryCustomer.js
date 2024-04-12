@@ -14,9 +14,27 @@ async function performSearch() {
         }
 
         var data = await response.json();
-        // Filter the data to include only vehicles with status 'A'
-        var availableVehicles = data.filter(vehicle => vehicle.status === 'A');
-        displaySearchResults(availableVehicles); // Display search results
+        
+        // Retrieve filter criteria from the filter form
+        var manufacturerFilter = document.getElementById('manufacturerFilter').value;
+        var carNameFilter = document.getElementById('carNameFilter').value;
+        var yearFilter = document.getElementById('yearFilter').value;
+        var typeFilter = document.getElementById('typeFilter').value;
+        var colorFilter = document.getElementById('colorFilter').value;
+        var licensePlateFilter = document.getElementById('licensePlateFilter').value;
+        
+        // Apply filter criteria to the fetched data
+        var filteredData = data.filter(vehicle => {
+            return (!manufacturerFilter || vehicle.manufacturer.toLowerCase().includes(manufacturerFilter.toLowerCase())) &&
+                   (!carNameFilter || vehicle.vehicleName.toLowerCase().includes(carNameFilter.toLowerCase())) &&
+                   (!yearFilter || vehicle.year.toLowerCase().includes(yearFilter.toLowerCase())) &&
+                   (!typeFilter || vehicle.type.toLowerCase().includes(typeFilter.toLowerCase())) &&
+                   (!colorFilter || vehicle.color.toLowerCase().includes(colorFilter.toLowerCase())) &&
+                   (!licensePlateFilter || vehicle.licensePlate.toLowerCase().includes(licensePlateFilter.toLowerCase())) &&
+                   vehicle.status === 'A';
+        });
+        
+        displaySearchResults(filteredData); // Display search results
     } catch (error) {
         console.error('Error fetching data:', error);
         searchResultsContainer.innerHTML = '<p>Error fetching data. Please try again later.</p>';
@@ -65,8 +83,6 @@ async function displaySearchResults(data) {
         html += '<b>Type:</b> ' + vehicle.type + '<br>';
         html += '<b>Color:</b> ' + vehicle.color + '<br>';
         html += '<b>License Plate:</b> ' + vehicle.licensePlate + '<br>';
-        
-        }
 
         // Status
         html += '<b>Status:</b> ';
@@ -76,12 +92,7 @@ async function displaySearchResults(data) {
             // Add rent button for available vehicles
             html += `<button class="rent-button" data-license-plate="${vehicle.licensePlate}">Rent</button>`;
             html += '<br>';
-        } else if (vehicle.status === 'O') {
-            html += 'Out';
-        } else if (vehicle.status === 'M') {
-            html += 'In Service';
-            html += '<br>';
-        }
+        } 
         html += '<br>';
         html += '</li>';
         html += '<hr>'; // Add horizontal line between cars
@@ -98,6 +109,7 @@ async function displaySearchResults(data) {
             rentCar(licensePlate);
         });
     });
+}
 
 function renderSearchResults(vehicles) {
     const searchResultsContainer = document.getElementById('searchResults');
@@ -127,3 +139,4 @@ function renderSearchResults(vehicles) {
         }
     });
 }
+
