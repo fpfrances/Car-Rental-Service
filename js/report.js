@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
             alert(responseData.message);
             maintenanceReportForm.reset();
             
-            // Redirect to inventory.html after successful submission
-            window.location.href = 'inventory.html';
+            // Redirect to inventoryStaff.html after successful submission
+            window.location.href = 'inventoryStaff.html';
         } catch (error) {
             console.error('Error submitting maintenance report:', error);
             alert('Failed to submit maintenance report. Please try again later.');
