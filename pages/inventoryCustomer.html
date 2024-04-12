@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knights Auto - Inventory</title>
+    <link rel="stylesheet" media="screen and (min-width: 120px)" type="text/css" href="../css/inventory.css">
+</head>
+<body>
+    <ul class="nav">
+        <li><button onclick="location.href='indexCustomer.html'"><b>Home</b></button></li>
+        <li><button onclick="location.href='account.html'"><b>Account</b></button></li>
+        <li><button onclick="location.href='contact.html'"><b>Contact Us</b></button></li>
+        <li><button onclick="location.href='about.html'"><b>About Us</b></button></li>
+    </ul>
+    <div class="container">
+        <h1><b>Car Inventory</b></h1>
+
+        <button class="filter-toggle" onclick="toggleFilterForm()">Filter Cars</button>
+
+        <form class="filter-form" action="#" method="get" onsubmit="performSearch(); return false;">
+            <label for="manufacturerFilter"><b>Filter by Manufacturer:</b></label>
+            <input type="text" id="manufacturerFilter" name="manufacturerFilter" placeholder="Enter manufacturer">
+            
+            <label for="carNameFilter"><b>Filter by Car Model:</b></label>
+            <input type="text" id="carNameFilter" name="carNameFilter" placeholder="Enter car name">
+
+            <label for="yearFilter"><b>Filter by Year:</b></label>
+            <input type="number" id="yearFilter" name="yearFilter" placeholder="Enter year">
+
+            <label for="typeFilter"><b>Filter by Vehicle Type:</b></label>
+            <select id="typeFilter" name="typeFilter">
+                <option value="">Select type</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Truck">Truck</option>
+                <option value="Coupe">Coupe</option>
+                <!-- Add more options if we need -->
+            </select>
+
+            <label for="colorFilter"><b>Filter by Color:</b></label>
+            <input type="text" id="colorFilter" name="colorFilter" placeholder="Enter color">
+
+            <label for="licensePlateFilter"><b>License Plate:</b></label>
+            <input type="text" id="licensePlateFilter" name="licensePlate" placeholder="Enter license plate">
+
+            <button type="submit"><b>Search</b></button>
+        </form>
+
+        <div id="searchResults"></div>
+    </div>
+    <script src="../js/inventoryCustomer.js"></script>
+    <script>
+        // Function to handle clicking the rent button
+        function rentCar(licensePlate) {
+            location.href = `rental.html?licensePlate=${licensePlate}`;
+        }
+
+        // Add event listeners to rent buttons
+        document.addEventListener('DOMContentLoaded', function () {
+            const rentButtons = document.querySelectorAll('.rent-button');
+            rentButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const licensePlate = this.getAttribute('data-license-plate');
+                    rentCar(licensePlate);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -7,21 +7,22 @@ async function performSearch() {
     var searchResultsContainer = document.getElementById('searchResults');
     searchResultsContainer.innerHTML = ''; // Clear previous search results
 
-    var query = buildQuery(); // Build query parameters
-
     try {
-        var response = await fetch('http://localhost:3000/vehicles' + query);
+        var response = await fetch('http://localhost:3000/vehicles');
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }
 
         var data = await response.json();
-        displaySearchResults(data); // Display search results
+        // Filter the data to include only vehicles with status 'A'
+        var availableVehicles = data.filter(vehicle => vehicle.status === 'A');
+        displaySearchResults(availableVehicles); // Display search results
     } catch (error) {
         console.error('Error fetching data:', error);
         searchResultsContainer.innerHTML = '<p>Error fetching data. Please try again later.</p>';
     }
 }
+
 
 function buildQuery() {
     var queryParams = [];
@@ -65,14 +66,6 @@ async function displaySearchResults(data) {
         html += '<b>Color:</b> ' + vehicle.color + '<br>';
         html += '<b>License Plate:</b> ' + vehicle.licensePlate + '<br>';
         
-        // Display maintenance details if the vehicle is under maintenance
-        if (vehicle.status === 'M') {
-            const maintenance = await findMaintenanceForVehicle(vehicle.licensePlate);
-            // Ensure that maintenance is not null or undefined before accessing its properties
-            if (maintenance) {
-                html += '<b>Maintenance Details:</b> ' + maintenance.details + '<br>';
-                html += '<b>Expected Return Date:</b> ' + maintenance.expectedReturnDate + '<br>';
-            }
         }
 
         // Status
@@ -83,14 +76,11 @@ async function displaySearchResults(data) {
             // Add rent button for available vehicles
             html += `<button class="rent-button" data-license-plate="${vehicle.licensePlate}">Rent</button>`;
             html += '<br>';
-            // Maintenance button for vehicles
-            html += `<button class="maintenance-button" data-license-plate="${vehicle.licensePlate}">Initiate Service</button>`;
         } else if (vehicle.status === 'O') {
             html += 'Out';
         } else if (vehicle.status === 'M') {
             html += 'In Service';
             html += '<br>';
-            html += `<button class="exit-maintenance-button" data-license-plate="${vehicle.licensePlate}">Complete Maintenance</button>`;
         }
         html += '<br>';
         html += '</li>';
@@ -108,32 +98,6 @@ async function displaySearchResults(data) {
             rentCar(licensePlate);
         });
     });
-
-    //Event listeners to enter maintenance buttons
-    const maintButtons = document.querySelectorAll('.maintenance-button');
-    maintButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const licensePlate = this.getAttribute('data-license-plate');
-            const redirectTo = `report.html?licensePlate=${licensePlate}`;
-            window.location.href = redirectTo;
-        });
-    });
-
-    //Adding event listeners to end maintenance buttons
-    const endMaintButtons = document.querySelectorAll('.exit-maintenance-button');
-    endMaintButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const licensePlate = this.getAttribute('data-license-plate');
-            deleteMaintenance(licensePlate);
-            const redirectTo = `completeMaint.html?licensePlate=${licensePlate}`;
-            window.location.href = redirectTo;
-             // Wait for 2 seconds before reloading the page
-        /*setTimeout(() => {
-            location.reload();
-        }, 2000);*/
-        });
-    });
-}
 
 function renderSearchResults(vehicles) {
     const searchResultsContainer = document.getElementById('searchResults');
@@ -156,70 +120,10 @@ function renderSearchResults(vehicles) {
             rentButton.textContent = 'Rent';
             rentButton.addEventListener('click', function() {
                 // Redirect to rental page with vehicle ID
-                window.location.href = `rental.html?id=${vehicle._id}`;
+                window.location.href = `rentalCustomer.html?id=${vehicle._id}`;
             });
             vehicleDiv.appendChild(rentButton); // Append rent button to vehicle div
             searchResultsContainer.appendChild(vehicleDiv); // Append vehicle div to search results container
         }
     });
-}
-
-async function findMaintenanceForVehicle(licensePlate) {
-    try {
-        const response = await fetch(`http://localhost:3000/findMaintenance?licensePlate=${licensePlate}`, {
-            method: 'GET',
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to find maintenance');
-        }
-
-        const responseData = await response.json();
-        return responseData.maintenance; // Return maintenance data only
-    } catch (error) {
-        console.error('Error finding maintenance for vehicle', error);
-        throw new Error('Failed to find maintenance for vehicle');
-    }
-}
-
-
-
-async function deleteMaintenance(licensePlate) {
-    const requestData = { licensePlate: licensePlate };
-    try {
-        const response = await fetch('http://localhost:3000/exit-maintenance', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestData)
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to delete maintenance');
-        }
-
-        // If deletion is successful, update the vehicle status to 'A'
-        const vehicle = await fetchVehicleByLicensePlate(licensePlate);
-        if (vehicle) {
-            vehicle.status = 'A';
-            await updateVehicleStatus(vehicle._id, 'A');
-        }
-
-        // Display success message on the webpage
-        const successMessageElement = document.getElementById('successMessage');
-        successMessageElement.textContent = 'Maintenance record deleted successfully';
-        successMessageElement.style.display = 'block'; // Ensure the message is visible
-
-        return true; // Return true to indicate successful deletion
-    } catch (error) {
-        console.error('Error deleting maintenance:', error);
-
-        // Display error message on the webpage
-        const errorMessageElement = document.getElementById('errorMessage');
-        errorMessageElement.textContent = 'Failed to delete maintenance record';
-        errorMessageElement.style.display = 'block'; // Ensure the message is visible
-
-        return false; // Return false to indicate failed deletion
-    }
 }
