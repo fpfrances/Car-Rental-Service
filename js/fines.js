@@ -27,7 +27,7 @@ function calculateTotal() {
     const emptyTankCheckbox = document.getElementById('emptyTankCheckbox');
     const damageInstances = document.querySelectorAll('.damage-instance');
 
-    if (lateDropOffCheckbox.checked) {
+    if (lateDropOffCheckbox.checked ) {
         totalFines += 100;
     }
 
@@ -59,9 +59,10 @@ function printReceipt() {
         // Construct the HTML content of the receipt
         const receiptContent = `
             <h1>Receipt</h1>
-            <p><strong>Thank You!</strong></p>
+            <p><strong>Thank You For Choosing Knights Auto!</strong></p>
             <p><strong>Rental Date:</strong> ${date}</p>
-            <p><strong>Total Price:</strong> $${totalFines}</p>
+            <p><strong>Initial Price:</strong> $100</p>
+            <p><strong>Total Price After Fees:</strong> $${totalFines}</p>
             <!-- Add more receipt details as needed -->
         `;
     
