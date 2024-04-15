@@ -38,9 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error('Failed to submit reservation');
             }
 
-            const responseData = await response.json();
-            alert(responseData.message); // Show success message
-            reservationForm.reset(); // Reset the form
+            // Redirect to inventory.html after successful reservation submission
+            window.location.href = 'inventoryStaff.html';
         } catch (error) {
             console.error('Error submitting reservation:', error);
             alert('Failed to submit reservation. Please try again later.');
