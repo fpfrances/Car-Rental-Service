@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 countdownElement.innerText = secondsLeft;
                 if (secondsLeft <= 0) {
                     clearInterval(countdownInterval);
-                    window.location.href = '../pages/indexCustomer.html'; // Redirect after countdown
+                    window.location.href = '../pages/account.html'; // Redirect after countdown
                     document.body.removeChild(modal); // Remove modal after redirect
                 }
             }, 1000); // Update every second (1000 milliseconds)
