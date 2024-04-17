@@ -90,8 +90,8 @@ async function displaySearchResults(data) {
             html += 'Available';
             html += '<br>';
             // Add rent button for available vehicles
-            html += `<button class="rent-button" data-license-plate="${vehicle.licensePlate}">Rent</button>`;
-            html += '<br>';
+            html += `<button class="rent-button" data-license-plate="${vehicle.licensePlate}"><b>Rent</b></button>`;
+            //html += '<br>';
         } 
         html += '<br>';
         html += '</li>';

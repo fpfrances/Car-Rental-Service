@@ -81,16 +81,15 @@ async function displaySearchResults(data) {
             html += 'Available';
             html += '<br>';
             // Add rent button for available vehicles
-            html += `<button class="rent-button" data-license-plate="${vehicle.licensePlate}">Rent</button>`;
-            html += '<br>';
+            html += `<button class="rent-button" data-license-plate="${vehicle.licensePlate}"><b>Rent</b></button>`;
             // Maintenance button for vehicles
-            html += `<button class="maintenance-button" data-license-plate="${vehicle.licensePlate}">Initiate Service</button>`;
+            html += `<button class="maintenance-button" data-license-plate="${vehicle.licensePlate}"><b>Initiate Service</b></button>`;
         } else if (vehicle.status === 'O') {
             html += 'Out';
         } else if (vehicle.status === 'M') {
             html += 'In Service';
             html += '<br>';
-            html += `<button class="exit-maintenance-button" data-license-plate="${vehicle.licensePlate}">Complete Maintenance</button>`;
+            html += `<button class="exit-maintenance-button" data-license-plate="${vehicle.licensePlate}"><b>Complete Maintenance</b></button>`;
         }
         html += '<br>';
         html += '</li>';
