@@ -100,3 +100,32 @@ form {
 button:hover {
     background-color: #808080;
 }
+
+/* Base styles for the button */
+.returnToInventory {
+    /* Change the shape of the button */
+    border-radius: 8px; /* Rounded corners, you can adjust the value */
+    
+    /* Change the font */
+    font-family: Arial, sans-serif; /* Change this to your preferred font */
+    font-size: 14px; /* Adjust font size */
+    
+    /* Change the button size */
+    padding: 10px 20px; /* Adjust padding for width and height */
+    
+    /* Change button color */
+    background-color: #000000; /* Green background, change as needed */
+    color: white; /* White text */
+    
+    /* Add a border */
+    border: none; /* No border */
+    
+    /* Add transition for smooth hover effect */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover effect */
+.returnToInventory:hover {
+    /* Change background color on hover */
+    background-color: #333; /* Slightly darker green on hover */
+}
