@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             // Send reservation data to server
-            const response = await fetch('http://localhost:3000/reservation', {
+            const response = await fetch('http://localhost:3001/reservation', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             // Redirect to inventory.html after successful reservation submission
-            window.location.href = 'inventoryStaff.html';
+            window.location.href = '../pages/inventoryStaff.html';
         } catch (error) {
             console.error('Error submitting reservation:', error);
             alert('Failed to submit reservation. Please try again later.');

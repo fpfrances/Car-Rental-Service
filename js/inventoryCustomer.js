@@ -132,7 +132,7 @@ function renderSearchResults(vehicles) {
             rentButton.textContent = 'Rent';
             rentButton.addEventListener('click', function() {
                 // Redirect to rental page with vehicle ID
-                window.location.href = `rentalCustomer.html?id=${vehicle._id}`;
+                window.location.href = `../pages/rentalCustomer.html?id=${vehicle._id}`;
             });
             vehicleDiv.appendChild(rentButton); // Append rent button to vehicle div
             searchResultsContainer.appendChild(vehicleDiv); // Append vehicle div to search results container

@@ -10,7 +10,7 @@ async function performSearch() {
     var query = buildQuery(); // Build query parameters
 
     try {
-        var response = await fetch('http://localhost:3000/vehicles' + query);
+        var response = await fetch('http://localhost:3001/vehicles' + query);
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }
@@ -165,7 +165,7 @@ function renderSearchResults(vehicles) {
 
 async function findMaintenanceForVehicle(licensePlate) {
     try {
-        const response = await fetch(`http://localhost:3000/findMaintenance?licensePlate=${licensePlate}`, {
+        const response = await fetch(`http://localhost:3001/findMaintenance?licensePlate=${licensePlate}`, {
             method: 'GET',
         });
 
@@ -186,7 +186,7 @@ async function findMaintenanceForVehicle(licensePlate) {
 async function deleteMaintenance(licensePlate) {
     const requestData = { licensePlate: licensePlate };
     try {
-        const response = await fetch('http://localhost:3000/exit-maintenance', {
+        const response = await fetch('http://localhost:3001/exit-maintenance', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

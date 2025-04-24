@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             // Send the maintenance details to the server so a new maintenance object can be added to the database
-            const response = await fetch('http://localhost:3000/maintenanceReportSubmission', {
+            const response = await fetch('http://localhost:3001/maintenanceReportSubmission', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

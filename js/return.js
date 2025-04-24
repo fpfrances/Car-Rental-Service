@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         try {
-            const response = await fetch('http://localhost:3000/return', {
+            const response = await fetch('http://localhost:3001/return', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const responseData = await response.json();
                 alert(responseData.message); // Display success message
                 // redirect to Fines page
-                window.location.href = 'fines.html'
+                window.location.href = '../pages/fines.html'
             } else {
                 // Error returning vehicle
                 const errorText = await response.text();
