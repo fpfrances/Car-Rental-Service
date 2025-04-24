@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         try {
-            const response = await fetch('http://localhost:3001/login', {
+            const response = await fetch('https://car-rental-service-s9zk.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
