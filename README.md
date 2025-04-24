@@ -1,14 +1,35 @@
-# Car-Rental-Service
-By: Brayden Antonelli, Jacob Lingo, Filipe Pestana Frances, Ryan Pettit, Brandon Lora
+# Car Rental Service
 
-5) Car rental software
-   
-You are going to create a desktop application for car rental companies. The software will be
-used by the store workers. Workers can make reservations, make a checkout for
-reservation. He can add fines to a car which is returned to the store for smoking/ damage/
-empty tank etc. Sometimes some cars may be out of office because it is being used by
-another customer or they may be in maintenance service. The worker will create a
-report/receipt for the car when it is returned by the customer. You will not need to add a
-payment system. The cars can be taken from a store and can be dropped to another one.
-If you are going to make a web application, you will need to add a user login system so that
-customers can also make reservations to the cars.
+🚗 A full-stack web application that allows users to create accounts, browse cars, and make rental reservations. Built for our POOSD class project at UCF.
+
+## 🔧 Technologies Used
+- **Frontend**: HTML, CSS, JavaScript (with modular JS)
+- **Backend**: Node.js, Express.js, MongoDB
+- **Database**: MongoDB Atlas
+- **Deployment**:
+  - Frontend: GitHub Pages
+  - Backend: Render
+
+## 🚀 Features
+- User authentication
+- Admin dashboard for car management
+- Car browsing and filtering
+- Reservation system
+- Responsive design
+
+🔗 Original Repository
+This project was originally developed as a collaborative effort during our Software Engineering course at UCF.
+You can view the original repository here: [Original repository](https://github.com/BraydenAntonelli/Car-Rental-Service)
+
+👥 Credits
+This project was developed collaboratively by the following team members as part of our Software Engineering class at UCF:
+
+Brayden Antonelli
+
+Jacob Lingo
+
+Filipe Pestana Frances
+
+Ryan Pettit
+
+Brandon Lora
