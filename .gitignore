@@ -1,0 +1,8 @@
+# Ignore environment files
+backend/.env
+
+# Ignore node modules
+backend/node_modules/
+
+# Ignore IDE specific files
+.vscode/
