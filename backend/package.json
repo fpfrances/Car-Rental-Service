@@ -1,7 +1,7 @@
 {
   "name": "car-rental-service",
   "version": "1.0.0",
-  "description": "By: Brayden Antonelli, Jacob Lingo, Filipe Pestana Frances(Everyone Else Add Names)",
+  "description": "By: Brayden Antonelli, Jacob Lingo, Filipe Pestana Frances, Ryan Pettit, Brandon Lora",
   "main": "server.js",
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -32,7 +32,7 @@
     "start": "node server.js",
     "dev": "nodemon js/server.js",
     "predeploy": "npm run build",
-    "deploy" : "gh-pages -d build" 
+    "deploy" : "gh-pages -d ." 
   },
   "author": "Filipe",
   "license": "MIT",
@@ -50,6 +50,7 @@
   ],
   "homepage": "https://fpfrances.github.io/Car-Rental-Service/",
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "gh-pages": "^5.0.0"
   }
 }
