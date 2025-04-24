@@ -172,7 +172,6 @@ app.post('/login', async (req, res) => {
             const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
             return hashHex;
         }
-      
         // Hash the provided password using SHA-256
         const hashedPassword = await sha256(userPassword);
 
@@ -198,8 +197,8 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-      
-      
+
+
 // Route to handle returning a vehicle
 app.post('/return', async (req, res) => {
     try {
