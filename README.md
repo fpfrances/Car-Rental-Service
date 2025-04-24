@@ -1,15 +1,10 @@
 # Car Rental Service
 
-## Live Demo
-
-▶️ [Rental car website](https://fpfrances.github.io/Car-Rental-Service/)
-
-
 🚗 A full-stack web application that allows users to create accounts, browse cars, and make rental reservations. Built for our POOSD class project at UCF.
 
 ## Live Demo
 
-▶️ [Check out the live site here](https://fpfrances.github.io/Car-Rental-Service/)
+▶️ [Rental car website](https://fpfrances.github.io/Car-Rental-Service/)
 
 
 ## 🔧 Technologies Used
