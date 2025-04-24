@@ -12,7 +12,7 @@ document.getElementById('addVehicleForm').addEventListener('submit', async funct
     jsonObject['licensePlate'] = licensePlate;
 
     try {
-        const response = await fetch('http://localhost:3001/vehicles', {
+        const response = await fetch('https://car-rental-service-s9zk.onrender.com/vehicles', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

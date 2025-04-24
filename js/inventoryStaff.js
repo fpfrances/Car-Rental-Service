@@ -165,7 +165,7 @@ function renderSearchResults(vehicles) {
 
 async function findMaintenanceForVehicle(licensePlate) {
     try {
-        const response = await fetch(`http://localhost:3001/findMaintenance?licensePlate=${licensePlate}`, {
+        const response = await fetch(`https://car-rental-service-s9zk.onrender.com/findMaintenance?licensePlate=${licensePlate}`, {
             method: 'GET',
         });
 
@@ -186,7 +186,7 @@ async function findMaintenanceForVehicle(licensePlate) {
 async function deleteMaintenance(licensePlate) {
     const requestData = { licensePlate: licensePlate };
     try {
-        const response = await fetch('http://localhost:3001/exit-maintenance', {
+        const response = await fetch('https://car-rental-service-s9zk.onrender.com/exit-maintenance', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             // Send reservation data to server
-            const response = await fetch('http://localhost:3001/reservation', {
+            const response = await fetch('https://car-rental-service-s9zk.onrender.com/reservation', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
