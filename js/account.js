@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const userEmail = document.getElementById('customerEmail').value;
         const userPassword = document.getElementById('customerPassword').value;
 
+        // Log form data to ensure it's correct
+        console.log('Form Data:', { userEmail, userPassword });
+
         // Construct request body
         const formData = {
             userEmail,
