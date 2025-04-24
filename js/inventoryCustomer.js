@@ -8,7 +8,7 @@ async function performSearch() {
     searchResultsContainer.innerHTML = ''; // Clear previous search results
 
     try {
-        var response = await fetch('http://localhost:3000/vehicles');
+        var response = await fetch('https://car-rental-service-s9zk.onrender.com/vehicles');
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }

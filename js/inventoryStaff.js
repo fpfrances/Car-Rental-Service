@@ -10,7 +10,7 @@ async function performSearch() {
     var query = buildQuery(); // Build query parameters
 
     try {
-        var response = await fetch('http://localhost:3001/vehicles' + query);
+        var response = await fetch('https://car-rental-service-s9zk.onrender.com/vehicles' + query);
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }
