@@ -2,6 +2,11 @@
 
 🚗 A full-stack web application that allows users to create accounts, browse cars, and make rental reservations. Built for our POOSD class project at UCF.
 
+## Live Demo
+
+▶️ [Check out the live site here](https://fpfrances.github.io/Car-Rental-Service/)
+
+
 ## 🔧 Technologies Used
 - **Frontend**: HTML, CSS, JavaScript (with modular JS)
 - **Backend**: Node.js, Express.js, MongoDB
