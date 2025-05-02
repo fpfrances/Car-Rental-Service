@@ -26,6 +26,11 @@ app.use(bodyParser.json());
 // Enable CORS
 app.use(cors());
 
+// Ping test
+app.get('/ping', (req, res) => {
+    res.status(200).send('Server is alive');
+});
+
 // POST route to add a new vehicle
 app.post('/vehicles', async (req, res) => {
     try {
